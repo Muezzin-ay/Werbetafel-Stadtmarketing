@@ -16,7 +16,7 @@ $.get("/api/getSlides", (data, status) => {
 
 $(document).ready( () => {
     Reveal.initialize({
-        autoSlide: 5000,
+        autoSlide: 10000,
         loop: true,
         controls: false, //standart is false, debug -> true
         progress: false,
