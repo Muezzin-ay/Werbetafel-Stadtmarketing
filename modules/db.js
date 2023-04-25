@@ -3,7 +3,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 
 
-const sequelize = new Sequelize('testing', 'root', 'polizei', {
+const sequelize = new Sequelize('testing', 'root', 'feuerwehr', {
     dialect: 'mariadb',
     dialectOptions: {
     // Your mysql2 options here
