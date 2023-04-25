@@ -13,9 +13,9 @@ const commands = require('./modules/system_commands')
 const PORT = 8084;
 
 //establish database connection
-commands.startMariaDBServer(db.authenticate)
-
-//db.initDatabase();
+//commands.startMariaDBServer()
+db.authenticate();
+db.initDatabase();
 var app = express();
 
 app.use(function(req, res, next){
