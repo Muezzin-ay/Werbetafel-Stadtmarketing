@@ -1,0 +1,7 @@
+/node_modules
+/package-lock.json
+/public/slides/*
+/public/src/jquery/jquery.js
+/public/src/jquery-ui/jquery-ui.js
+/public/src/jquery-ui-sortable-animation/jquery.ui.sortable-animation.js
+/public7src/reveal.js

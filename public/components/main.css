@@ -1,0 +1,37 @@
+
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    margin: 0px;
+}
+
+.presentation-item {
+    background-color: #ddd;
+    margin: 10px;
+    display: flex;
+}
+
+.presentation-item img {
+    float: left; 
+    margin: 10px;
+}
+
+.presentation-description {
+    margin-right: 75px;
+    margin-left: 15px;
+}
+
+.presentation-control {
+    float: left;
+    margin: 10px;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+
+.presentation-control button {
+    margin: 10px;
+}
