@@ -2,7 +2,7 @@
 
 $.holdReady( true );
 
-$.get("/api/getPr", (data, status) => {
+$.get("/api/getSlides", (data, status) => {
     slides = JSON.parse(data);
     slides.forEach(element => {
         console.log(element);
