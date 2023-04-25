@@ -8,7 +8,7 @@ function generatePresentationItems() {
             $('.main').append(
                 `
                 <li class="presentation-item" id="${id}">
-                <img src="/slides/pr${element.PFk}/${id}.JPG" height="216">
+                <img src="/slides/pr${element.PFk}/Slide${id}.JPG" height="216">
                     <div class="presentation-description">
                         <div>
                             <h2>Presentation Überschrift ${id}</h2>
