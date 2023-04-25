@@ -6,7 +6,7 @@ $.get("/api/getSlides", (data, status) => {
     slides = JSON.parse(data);
     slides.forEach(element => {
         console.log(element);
-        $('.slides').append(`<section data-background="/slides/pr${element.PFk}/${element.ID}.JPG"></section>`);
+        $('.slides').append(`<section data-background="/slides/pr${element.PFk}/Slide${element.ID}.JPG"></section>`);
     });
     $.holdReady( false );
     
