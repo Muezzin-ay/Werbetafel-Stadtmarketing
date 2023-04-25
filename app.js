@@ -4,6 +4,7 @@ var express = require('express');
 // Own 
 const api = require('./modules/module_api');
 const db = require('./modules/db')
+const commands = require('./modules/system_commands')
 
 
 //const webdriver = require('./modules/webdriver');
@@ -11,7 +12,9 @@ const db = require('./modules/db')
 // Settings
 const PORT = 8084;
 
-db.authenticate(); //establish database connection
+//establish database connection
+commands.startMariaDBServer(db.authenticate)
+
 //db.initDatabase();
 var app = express();
 
