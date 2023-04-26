@@ -92,8 +92,11 @@ module.exports = {
         const presentations = await this.Presentation.findAll();
         let data = [];
         for (let i=0; i<presentations.length; i++) {
+            prJsonItem = {}
             let firstSlide = await this.Slide.findOne({ where: { PFk: presentations[i].dataValues.ID, Sequence: 0}});
-            data.push(firstSlide);
+            prJsonItem.slide = firstSlide;
+            prJsonItem.presentation = presentations[i];
+            data.push(prJsonItem);
         }
         res.send(JSON.stringify(data));
     },

@@ -4,24 +4,27 @@ function generatePresentationItems() {
     $.get('/api/getPr', (data, status) => {
         slides = JSON.parse(data);
         slides.forEach(element => {
-            id = element.ID;
+
+            let date = new Date(element.presentation.createdAt);
+
+
             $('.main').append(
                 `
-                <li class="presentation-item" id="${id}">
-                <img src="/slides/pr${element.PFk}/Slide${id}.JPG" height="216">
+                <li class="presentation-item" id="${element.slide.ID}">
+                <img src="/slides/pr${element.slide.PFk}/Slide${element.slide.ID}.JPG" height="216">
                     <div class="presentation-description">
                         <div>
-                            <h2>Presentation Überschrift ${id}</h2>
+                            <h2>${element.presentation.Name}</h2>
                         </div>
             
                         <div>
-                            <p>Erstellungsdatum: </p>
-                            <p>Firma: </p>
+                            <p>Erstellungsdatum: ${date.toLocaleString()}</p>
+                            <p>Firma: ${element.presentation.Creator}</p>
                         </div>
                     </div>
                     <div class="presentation-control">
-                        <button onclick="swapItemUp(this)">UP</button>
-                        <button onclick="swapItemDown(this)">DOWN</button>
+                        <button class="btn btn-primary" onclick="swapItemUp(this)">UP</button>
+                        <button class="btn btn-primary" onclick="swapItemDown(this)">DOWN</button>
                     </div>
                 </li>
                 `
