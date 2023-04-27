@@ -15,7 +15,7 @@ module.exports = {
         await sequelize.authenticate();
     },
     
-    testCon: async function() {
+    testConnection: async function() {
         try {
             console.log('Connection has been established successfully.');
           } catch (error) {
@@ -116,8 +116,4 @@ module.exports = {
         await this.Slide.destroy({ where: { id: slideId } });
         res.send('good');
     },
-
-    getPresentationSequence: async function(res) {
-        
-    }
 }
