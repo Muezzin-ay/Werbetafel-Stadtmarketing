@@ -3,7 +3,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 
 
-const sequelize = new Sequelize('werbetafel_stadtmarketing', 'panel-server', 'püemv7r38tnbba34', {
+const sequelize = new Sequelize('werbetafel_stadtmarketing', 'panelserver', 'polzei', {
     dialect: 'mariadb',
     dialectOptions: {}
 })
