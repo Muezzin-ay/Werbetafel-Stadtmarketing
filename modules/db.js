@@ -3,11 +3,9 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 
 
-const sequelize = new Sequelize('testing', 'panel', 'polizei', {
+const sequelize = new Sequelize('werbetafel_stadtmarketing', 'panelserver', 'polizei', {
     dialect: 'mariadb',
-    dialectOptions: {
-    // Your mysql2 options here
-    }
+    dialectOptions: {}
 })
 
 
@@ -17,7 +15,7 @@ module.exports = {
         await sequelize.authenticate();
     },
     
-    testCon: async function() {
+    testConnection: async function() {
         try {
             console.log('Connection has been established successfully.');
           } catch (error) {
@@ -67,6 +65,16 @@ module.exports = {
         try {
             await this.Presentation.sync({force: true});
             await this.Slide.sync({force: true});
+
+            // Also Create presentation entrys
+            const pre = await this.Presentation.create({ ExpireDate: '2023-05-12 12:00:00', Name: "Campagne-1", Creator: "Robin H."});
+            await pre.update({Sequence: pre.dataValues.ID}) //Set own ID as standart Sequence Position
+
+            for (let i=0; i<17; i++) {
+                this.createSlide(pre.dataValues.ID, i);
+            }
+            // End
+            
         } catch(e) {
             console.log(e);
         }
@@ -118,8 +126,4 @@ module.exports = {
         await this.Slide.destroy({ where: { id: slideId } });
         res.send('good');
     },
-
-    getPresentationSequence: async function(res) {
-        
-    }
 }
