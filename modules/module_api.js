@@ -52,7 +52,6 @@ api.post('/upload', upload.single('pdf-file'), function(req, res) {
                 res.redirect('/');
             });
         })
-        */
         res.redirect('/');
     } catch (error) {
         res.status(500).send('Server is occured.')
