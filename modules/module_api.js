@@ -10,8 +10,8 @@ let database = require('./db');
 // Constants
 const api = express.Router();
 
-const tempFileDestination = './public/slides/temp/';
-const upload = multer({ dest:  tempFileDestination})
+const slideDest = './public/slides/';
+const upload = multer({ dest:  slideDest + "temp/"})
 
 
 api.get('/getPr', (req, res) => {
@@ -37,23 +37,21 @@ api.get('/presentationCount', (req, res) => {
 
 api.post('/upload', upload.single('image'), function(req, res) {
     try {
-        /*
         fs.readdir(slideDest, function(error, files) {
             
-            let oldPath = slideDest + req.file.filename;
+            let oldPath = slideDest + "temp/" + req.file.filename;
             let newPath = slideDest + req.file.originalname;
             fs.rename(oldPath, newPath, function () {
+                /*
                 let imageOut = slideDest + "out/"
                 convert.convertPP(newPath, imageOut, function () {
-                    fs.unlinkSync(newPath); //Delete file
+                    //fs.unlinkSync(newPath); //Delete file
                     handle_config.moveSlides();
                     res.redirect('/'); //Redirect to Startpage
-                });
+                })*/
+                res.redirect('/');
             });
-            
         })
-        */
-        res.redirect('/');
     } catch (error) {
         res.status(500).send('Server is occured.')
         console.log(error);
