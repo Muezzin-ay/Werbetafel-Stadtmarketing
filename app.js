@@ -1,11 +1,10 @@
-var http = require('http');
-var express = require('express');
+const http = require('http');
+const express = require('express');
 
 // Own 
 const api = require('./modules/module_api');
 const db = require('./modules/db')
 const commands = require('./modules/system_commands')
-
 
 //const webdriver = require('./modules/webdriver');
 

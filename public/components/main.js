@@ -36,7 +36,7 @@ $(document).ready( () => {
     $('.main').sortable({
         animation: 150, //animation duration
         change: () => {
-            console.log("hello");
+            console.log("changed slide sequence!");
         }
     });
 

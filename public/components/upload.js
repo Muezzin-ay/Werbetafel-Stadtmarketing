@@ -61,7 +61,7 @@ $(document).ready( () => {
           }
         })
       
-        formData.append('image', file)
+        formData.append('pdf-file', file)
         xhr.send(formData)
     }
 })

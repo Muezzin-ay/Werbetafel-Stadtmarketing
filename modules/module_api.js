@@ -35,9 +35,8 @@ api.get('/presentationCount', (req, res) => {
 });
 
 
-api.post('/upload', upload.single('image'), function(req, res) {
+api.post('/upload', upload.single('pdf-file'), function(req, res) {
     try {
-        /*
         fs.readdir(slideDest, function(error, files) {
             
             let oldPath = slideDest + req.file.filename;
@@ -52,7 +51,7 @@ api.post('/upload', upload.single('image'), function(req, res) {
             });
             
         })
-        */
+        
         res.redirect('/');
     } catch (error) {
         res.status(500).send('Server is occured.')
