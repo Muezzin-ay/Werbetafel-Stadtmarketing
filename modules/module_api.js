@@ -1,11 +1,12 @@
 const express = require('express');
 const multer = require('multer');
 const fs = require('fs');
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 
 
 // Own Modules
 let database = require('./db');
+let convert = require('./convert')
 
 // Constants
 const api = express.Router();
@@ -38,21 +39,15 @@ api.get('/presentationCount', (req, res) => {
 api.post('/upload', upload.single('pdf-file'), function(req, res) {
     try {
         fs.readdir(slideDest, function(error, files) {
-            
             let oldPath = slideDest + "temp/" + req.file.filename;
-            let newPath = slideDest + req.file.originalname;
-            fs.rename(oldPath, newPath, function () {
-                /*
-                let imageOut = slideDest + "out/"
-                convert.convertPP(newPath, imageOut, function () {
-                    //fs.unlinkSync(newPath); //Delete file
-                    handle_config.moveSlides();
-                    res.redirect('/'); //Redirect to Startpage
-                })*/
-                res.redirect('/');
+            let newPath = slideDest + "temp/" + req.file.originalname;
+            fs.rename(oldPath, newPath, async function () {
+                let imgOut = slideDest + "temp/";
+                await convert.convertFromPdf(newPath, imgOut);
+                fs.unlinkSync(newPath);
+                res.status(200);
             });
         })
-        res.redirect('/');
     } catch (error) {
         res.status(500).send('Server is occured.')
         console.log(error);
