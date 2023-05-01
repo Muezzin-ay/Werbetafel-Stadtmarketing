@@ -38,16 +38,14 @@ api.get('/presentationCount', (req, res) => {
 
 api.post('/upload', upload.single('pdf-file'), function(req, res) {
     try {
-        fs.readdir(slideDest, function(error, files) {
-            let oldPath = slideDest + "temp/" + req.file.filename;
-            let newPath = slideDest + "temp/" + req.file.originalname;
-            fs.rename(oldPath, newPath, async function () {
-                let imgOut = slideDest + "temp/";
-                await convert.convertFromPdf(newPath, imgOut);
-                fs.unlinkSync(newPath);
-                res.status(200);
-            });
-        })
+        let oldPath = slideDest + "temp/" + req.file.filename;
+        let newPath = slideDest + "temp/" + req.file.originalname;
+        fs.rename(oldPath, newPath, async function () {
+            let imgOut = slideDest + "temp/";
+            await convert.convertFromPdf(newPath, imgOut);
+            fs.unlinkSync(newPath);
+            res.status(200);
+        });
     } catch (error) {
         res.status(500).send('Server is occured.')
         console.log(error);
