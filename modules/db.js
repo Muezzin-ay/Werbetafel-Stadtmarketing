@@ -67,12 +67,14 @@ module.exports = {
             await this.Slide.sync({force: true});
 
             // Also Create presentation entrys
+            /*
             const pre = await this.Presentation.create({ ExpireDate: '2023-05-12 12:00:00', Name: "Campagne-1", Creator: "Robin H."});
             await pre.update({Sequence: pre.dataValues.ID}) //Set own ID as standart Sequence Position
 
             for (let i=0; i<17; i++) {
                 this.createSlide(pre.dataValues.ID, i);
             }
+            */
             // End
             
         } catch(e) {
@@ -82,18 +84,18 @@ module.exports = {
     },
     
     
-    createPresentation: async function(res) {        
+    createPresentation: async function(slideCount, createSlideFolder) {        
         try {
             const pre = await this.Presentation.create({ ExpireDate: '2023-05-12 12:00:00', Name: "Campagne-1", Creator: "Robin H."});
             await pre.update({Sequence: pre.dataValues.ID}) //Set own ID as standart Sequence Position
 
-            for (let i=0; i<17; i++) {
+            for (let i=0; i<slideCount; i++) {
                 this.createSlide(pre.dataValues.ID, i);
             }
+            createSlideFolder(pre.dataValues.ID);
         } catch(e) {
             console.log(e);
         }
-        res.send("good");
     },
 
     readPresentations: async function(res) {

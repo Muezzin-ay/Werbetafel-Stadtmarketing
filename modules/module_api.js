@@ -42,8 +42,7 @@ api.post('/upload', upload.single('pdf-file'), function(req, res) {
         let newPath = slideDest + "temp/" + req.file.originalname;
         fs.rename(oldPath, newPath, async function () {
             let imgOut = slideDest + "temp/";
-            await convert.convertFromPdf(newPath, imgOut);
-            fs.unlinkSync(newPath);
+            await convert.createSlidesFromPdf(newPath, imgOut);
             res.status(200);
         });
     } catch (error) {
