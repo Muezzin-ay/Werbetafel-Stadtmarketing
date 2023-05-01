@@ -20,28 +20,34 @@ module.exports = {
 
         fs.unlinkSync(pdfFile);
         fs.readdir(imgOut, (err, files) => {
-            db.createPresentation(files.length, (presentationId) => {                
-                files.forEach(file => {
-                    const presentationFolder = path.join(__dirname, `/../public/slides/pr${presentationId}`);
-                    if (!fs.existsSync(presentationFolder)) {
-                        fs.mkdir(presentationFolder, (err) => {
-                            if (err) {
-                                console.log(err);
-                            };
-                            oldPath = path.join(__dirname, `/../public/slides/temp/${file}`);
-                            newPath = path.join(__dirname, presentationFolder, `/${file}`);
-                            fs.rename(oldPath, newPath, (err)=> {
-                                if (err) {
-                                    console.log(err);
-                                }
-                            });
-                        })
-                    }
-                    
-                    
+            db.createPresentation(files.length, (fileTag, slideID, presentationID) => {
+                oldPath = path.join(__dirname, `/../public/slides/temp/slide-${fileTag}.png`);
+                newPath = path.join(__dirname, `/../public/slides/Slide-Pr${presentationID}-${slideID}.png`);
+                fs.rename(oldPath, newPath, (err)=> {
+                    if (err) {
+                        console.log(err);
+                    };
                 });
+            });
+            /*
+            db.createPresentation(files.length, (presentationId) => {  
+                const presentationFolder = path.join(__dirname, `/../public/slides/pr${presentationId}`);            
+                files.forEach(file => {
+                    if (err) {
+                        console.log(err);
+                    };
+                    oldPath = path.join(__dirname, `/../public/slides/temp/${file}`);
+                    newPath = path.join('/../public/slides/', file);
+                    fs.rename(oldPath, newPath, (err)=> {
+                        if (err) {
+                            console.log(err);
+                        };
+                    });
+                });
+            
 
             })
+            */
         });
 
 
