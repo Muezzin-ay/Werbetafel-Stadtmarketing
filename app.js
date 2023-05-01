@@ -14,7 +14,7 @@ const PORT = 8084;
 //establish database connection
 //commands.startMariaDBServer()
 db.authenticate();
-db.initDatabase();
+//db.initDatabase();
 var app = express();
 
 app.use(function(req, res, next){
