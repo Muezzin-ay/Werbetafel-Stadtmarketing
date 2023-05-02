@@ -44,7 +44,7 @@ $(document).ready( () => {
         ([...files]).forEach(uploadFile)
     }
 
-
+    /* //Old Code
     function uploadFile(file) {
         console.log("uploading!");
         var url = '/api/upload'
@@ -63,6 +63,52 @@ $(document).ready( () => {
       
         formData.append('pdf-file', file)
         xhr.send(formData)
+    }
+    */
+
+
+    function uploadFile(file) {
+        var formData = new FormData()
+        formData.append('pdf-file', file)
+
+        var last_response_len = false;
+        $.ajax({
+            url: '/api/upload',
+            dataType: 'script',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,                         
+            type: 'post',
+            xhrFields: {
+                onprogress: function(e)
+                {
+                
+                    // Completes streamed string
+                    var this_response, response = e.currentTarget.response;
+                    if(last_response_len === false)
+                    {
+                        this_response = response;
+                        last_response_len = response.length;
+                    }
+                    else
+                    {
+                        this_response = response.substring(last_response_len);
+                        last_response_len = response.length;
+                    }
+                    console.log(this_response);
+                    handleUploadFeedback(this_response);
+                    // End
+                }
+            }
+        });
+    }
+
+
+
+    function handleUploadFeedback(response) {
+        let statusInfo = response;
+        $('#status-text').text(statusInfo);
     }
 })
 

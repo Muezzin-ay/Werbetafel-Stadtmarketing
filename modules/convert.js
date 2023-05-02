@@ -7,7 +7,7 @@ const db = require('./db');
 
 
 module.exports = {
-    createSlidesFromPdf : async function(pdfFile, imgOut) {
+    createSlidesFromPdf : async function(pdfFile, imgOut, feedbackHandler) {
         const poppler = new Poppler("/usr/bin");
         const options = {
             firstPageToConvert: 1,
@@ -16,7 +16,9 @@ module.exports = {
             resolutionXYAxis: 400
         }
         let output = imgOut + "slide"
+        feedbackHandler.update( {status : 2} ); //[Status] Start converting
         const res = await poppler.pdfToCairo(pdfFile, output, options);
+        feedbackHandler.update( {status : 3} ); //[Status] End converting
 
         fs.unlinkSync(pdfFile);
         fs.readdir(imgOut, (err, files) => {
@@ -29,25 +31,6 @@ module.exports = {
                     };
                 });
             });
-            /*
-            db.createPresentation(files.length, (presentationId) => {  
-                const presentationFolder = path.join(__dirname, `/../public/slides/pr${presentationId}`);            
-                files.forEach(file => {
-                    if (err) {
-                        console.log(err);
-                    };
-                    oldPath = path.join(__dirname, `/../public/slides/temp/${file}`);
-                    newPath = path.join('/../public/slides/', file);
-                    fs.rename(oldPath, newPath, (err)=> {
-                        if (err) {
-                            console.log(err);
-                        };
-                    });
-                });
-            
-
-            })
-            */
         });
 
 
