@@ -42,14 +42,13 @@ api.post('/upload', upload.single('pdf-file'), function(req, res) {
     try {
         const feedbackHandler = new Progress(res);
 
-        feedbackHandler.update( {status : 1} ); //[Status] Received File
+        feedbackHandler.update(1); //[Status] Received File
         let oldPath = slideDest + "temp/" + req.file.filename;
         let newPath = slideDest + "temp/" + req.file.originalname;
         fs.rename(oldPath, newPath, async function () {
             let imgOut = slideDest + "temp/";
             await convert.createSlidesFromPdf(newPath, imgOut, feedbackHandler);
-            feedbackHandler.update( {status : 4} ); //[Status] Finished Uploading Process
-            feedbackHandler.close();
+            res.end();
         });
     } catch (error) {
         res.status(500).send('Server is occured.')

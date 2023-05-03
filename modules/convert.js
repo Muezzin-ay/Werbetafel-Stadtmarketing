@@ -16,9 +16,8 @@ module.exports = {
             resolutionXYAxis: 400
         }
         let output = imgOut + "slide"
-        feedbackHandler.update( {status : 2} ); //[Status] Start converting
         const res = await poppler.pdfToCairo(pdfFile, output, options);
-        feedbackHandler.update( {status : 3} ); //[Status] End converting
+        feedbackHandler.update(2); //[Status] End converting
 
         fs.unlinkSync(pdfFile);
         fs.readdir(imgOut, (err, files) => {

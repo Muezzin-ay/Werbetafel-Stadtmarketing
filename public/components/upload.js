@@ -3,6 +3,13 @@
 
 
 $(document).ready( () => {
+
+
+    $('#upload-button').click(uploadFile); //Give Upload Button its function
+
+    // Global Var
+    var FileToUpload = undefined;
+
     let dropArea = document.getElementById('drop-area')
 
     ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -41,33 +48,16 @@ $(document).ready( () => {
     }
 
     function handleFiles(files) {
-        ([...files]).forEach(uploadFile)
+        FileToUpload = files[0];
+        $('#upload-button').removeClass('disabled');
     }
 
-    /* //Old Code
-    function uploadFile(file) {
-        console.log("uploading!");
-        var url = '/api/upload'
-        var xhr = new XMLHttpRequest()
-        var formData = new FormData()
-        xhr.open('POST', url, true)
-      
-        xhr.addEventListener('readystatechange', function(e) {
-          if (xhr.readyState == 4 && xhr.status == 200) {
-            // Done. Inform the user
-          }
-          else if (xhr.readyState == 4 && xhr.status != 200) {
-            // Error. Inform the user
-          }
-        })
-      
-        formData.append('pdf-file', file)
-        xhr.send(formData)
-    }
-    */
 
+    function uploadFile() {
+        $('#upload-button').addClass('disabled');
 
-    function uploadFile(file) {
+        let file = FileToUpload; //Secure, because button is disabled
+
         var formData = new FormData()
         formData.append('pdf-file', file)
 
@@ -85,7 +75,7 @@ $(document).ready( () => {
                 {
                 
                     // Completes streamed string
-                    var this_response, response = e.currentTarget.response;
+                    let this_response, response = e.currentTarget.response;
                     if(last_response_len === false)
                     {
                         this_response = response;
@@ -96,10 +86,13 @@ $(document).ready( () => {
                         this_response = response.substring(last_response_len);
                         last_response_len = response.length;
                     }
-                    console.log(this_response);
                     handleUploadFeedback(this_response);
                     // End
                 }
+            },
+            success: () => {
+                $('#upload-button').html('Abschicken')
+                $('#upload-spinner').css('visibility', 'hidden')
             }
         });
     }
@@ -107,8 +100,15 @@ $(document).ready( () => {
 
 
     function handleUploadFeedback(response) {
-        let statusInfo = response;
-        $('#status-text').text(statusInfo);
+        const messages = ['Hochladen...', 'Konvertieren...', 'Aufräumen...']
+        let statusInfo = messages[0];
+        if (response.includes('data: {"done":false,"progress":1}')) {
+            statusInfo = messages[1];
+        } else if(response.includes('data: {"done":false,"progress":2}')) {
+            statusInfo = messages[2];
+        }
+        $('#upload-button').html(statusInfo);
+        $('#upload-spinner').css('visibility', 'visible');
     }
 })
 
