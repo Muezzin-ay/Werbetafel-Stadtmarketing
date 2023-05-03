@@ -88,8 +88,7 @@ body {
     margin-right: 5px;
     margin-left: auto;
     visibility: hidden;
-}
-    
+} 
 
 #drop-area.highlight {
     border-color: purple;

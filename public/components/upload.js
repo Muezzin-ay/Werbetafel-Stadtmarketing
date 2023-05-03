@@ -6,6 +6,7 @@ $(document).ready( () => {
 
 
     $('#upload-button').click(uploadFile); //Give Upload Button its function
+    $('#green-ack').hide();
 
     // Global Var
     var FileToUpload = undefined;
@@ -91,8 +92,12 @@ $(document).ready( () => {
                 }
             },
             success: () => {
-                $('#upload-button').html('Abschicken')
-                $('#upload-spinner').css('visibility', 'hidden')
+                $('#upload-button').html('Abschicken');
+                $('#upload-spinner').css('visibility', 'hidden');
+                $('#green-ack').show();
+                window.setTimeout(() => {
+                    $('#green-ack').hide();
+                }, 3000); //feedback for 3s 
             }
         });
     }
