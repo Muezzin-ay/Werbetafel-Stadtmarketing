@@ -134,5 +134,11 @@ module.exports = {
     readSettings: async function(res) {
         let settings = await this.Setting.findOne(); //Only one entry
         res.send(JSON.stringify(settings));
+    }, 
+
+    writeSettings: async function(settings) {
+        //await this.Setting.destroy({ where: { id: 1 } });
+        //await this.Setting.create(req.body.settings);
+        console.log(settings);
     }
 }

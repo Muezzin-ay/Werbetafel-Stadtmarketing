@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const fs = require('fs');
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 const { Progress } = require('express-progressbar');
 
@@ -12,10 +12,12 @@ let convert = require('./convert')
 
 // Constants
 const api = express.Router();
+api.use(bodyParser.json());
+api.use(bodyParser.urlencoded({extended:true}));
 
 const slideDest = './public/slides/';
 const upload = multer({ dest:  slideDest + "temp/"})
-
+ 
 
 api.get('/getPr', (req, res) => {
     database.readPresentations(res);
@@ -35,6 +37,12 @@ api.get('/del', (req, res) => {
 
 api.get('/getSettings', (req, res) => {
     database.readSettings(res);
+});
+
+api.post('/changeSettings', (req, res) => {
+    let settings = req.body.settings;
+    database.writeSettings(settings);
+    res.send('good');
 });
 
 
