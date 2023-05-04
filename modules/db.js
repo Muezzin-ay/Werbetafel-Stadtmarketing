@@ -1,5 +1,5 @@
 
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, SequelizeDatabaseError } = require('sequelize');
 
 
 
@@ -63,7 +63,8 @@ module.exports = {
     
     Setting: sequelize.define('Setting',  {
         AutoSlideDuration: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            defaultValue: 10000 //10 seconds
         }
     }),
     
@@ -74,9 +75,7 @@ module.exports = {
             await this.Slide.sync({force: true});
             await this.Setting.sync({force: true});
 
-            await this.Setting.create({ //Standart Settings
-                AutoSlideDuration: 10000 //10 seconds
-            });
+            await this.Setting.create({}); //Standart Settings
             
         } catch(e) {
             console.log(e);
@@ -138,7 +137,16 @@ module.exports = {
 
     writeSettings: async function(data, res) {
         let settings = await this.Setting.findOne(); //Only one entry
-        await settings.update(data);
-        res.send('good');
+        try {
+            await settings.update(data);
+            res.status(200).send('good');
+        } catch(err) {
+            if (err === SequelizeDatabaseError) {
+                res.status(406).send('Error: Invalid Datatype')
+            } else {
+                console.log('Unexpected Error: ' + err);
+                res.status(500).send('Server is occured.')
+            }
+        };
     }
 }

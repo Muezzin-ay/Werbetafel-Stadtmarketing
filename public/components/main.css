@@ -62,6 +62,7 @@ body {
 
 .drop-area-surround {
     margin: 50px auto; /* Maybe change back to 100px */
+    margin-top: 30px;
     width: 740px; /* 720 */
     /*height: 550px;*/
     background-color: #1B1F22;
@@ -116,4 +117,19 @@ body {
     padding: 30px;
     border-radius: 15px;
     height: fit-content;
+}
+
+.settings-controls {
+    display: flex;
+    align-items: center;
+}
+
+.settings-controls button {
+    margin-right: 5px;
+}
+
+.settings-controls img {
+    visibility: hidden;
+    margin-left: auto;
+    margin-right: 5px;
 }
