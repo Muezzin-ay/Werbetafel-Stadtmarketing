@@ -132,13 +132,13 @@ module.exports = {
     },
 
     readSettings: async function(res) {
-        let settings = await this.Setting.findOne(); //Only one entry
+        let settings = await this.Setting.findOne({ attributes: { exclude: ['id', 'createdAt', 'updatedAt'] } }); //Only one entry
         res.send(JSON.stringify(settings));
     }, 
 
-    writeSettings: async function(settings) {
-        //await this.Setting.destroy({ where: { id: 1 } });
-        //await this.Setting.create(req.body.settings);
-        console.log(settings);
+    writeSettings: async function(data, res) {
+        let settings = await this.Setting.findOne(); //Only one entry
+        await settings.update(data);
+        res.send('good');
     }
 }

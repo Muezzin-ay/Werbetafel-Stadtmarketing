@@ -40,9 +40,8 @@ api.get('/getSettings', (req, res) => {
 });
 
 api.post('/changeSettings', (req, res) => {
-    let settings = req.body.settings;
-    database.writeSettings(settings);
-    res.send('good');
+    let data = req.body.settings;
+    database.writeSettings(data, res);
 });
 
 

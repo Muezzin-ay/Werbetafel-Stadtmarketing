@@ -8,16 +8,15 @@ function uploadSettings() {
         {
             settings: settings
         },
-        (data, status) => {
-            console.log(data);
-    });
+        (data, status) => {}
+    );
 }
 
 
 $(document).ready( () => {
 
     $('.setting').each((i, element) => {
-        $(element).on('change', () => {
+        $(element).change(() => {
             let element_id = $(element).attr('id');
             settings[element_id] = $(element).val();
             uploadSettings();
