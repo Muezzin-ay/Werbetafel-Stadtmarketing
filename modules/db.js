@@ -131,8 +131,8 @@ module.exports = {
         res.send('good');
     },
 
-    getSettings: async function(res) {
-        let settings = await this.Setting.findAll()[1]; //Only one entry
+    readSettings: async function(res) {
+        let settings = await this.Setting.findOne(); //Only one entry
         res.send(JSON.stringify(settings));
     }
 }

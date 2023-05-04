@@ -33,8 +33,8 @@ api.get('/del', (req, res) => {
     database.deleteSlide(req.query.id, res);
 });
 
-api.get('/presentationCount', (req, res) => {
-    
+api.get('/getSettings', (req, res) => {
+    database.readSettings(res);
 });
 
 
