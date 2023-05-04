@@ -59,23 +59,24 @@ module.exports = {
             defaultValue: 0
         }
     }),
+
+    
+    Setting: sequelize.define('Setting',  {
+        AutoSlideDuration: {
+            type: DataTypes.INTEGER
+        }
+    }),
     
     // Do not execute this!
     initDatabase: async function() {
         try {
             await this.Presentation.sync({force: true});
             await this.Slide.sync({force: true});
+            await this.Setting.sync({force: true});
 
-            // Also Create presentation entrys
-            /*
-            const pre = await this.Presentation.create({ ExpireDate: '2023-05-12 12:00:00', Name: "Campagne-1", Creator: "Robin H."});
-            await pre.update({Sequence: pre.dataValues.ID}) //Set own ID as standart Sequence Position
-
-            for (let i=0; i<17; i++) {
-                this.createSlide(pre.dataValues.ID, i);
-            }
-            */
-            // End
+            await this.Setting.create({ //Standart Settings
+                AutoSlideDuration: 10000 //10 seconds
+            });
             
         } catch(e) {
             console.log(e);
@@ -86,7 +87,7 @@ module.exports = {
     
     createPresentation: async function(files, moveSlide) {        
         try {
-            const pre = await this.Presentation.create({ ExpireDate: '2023-05-12 12:00:00', Name: "Campagne-1", Creator: "Robin H."});
+            const pre = await this.Presentation.create({ ExpireDate: '2023-05-12 12:00:00', Name: "Campagne-1", Creator: "Robin H." });
             await pre.update({Sequence: pre.dataValues.ID}) //Set own ID as standart Sequence Position
             let slideCount = files.length;
 
@@ -129,4 +130,9 @@ module.exports = {
         await this.Slide.destroy({ where: { id: slideId } });
         res.send('good');
     },
+
+    getSettings: async function(res) {
+        let settings = await this.Setting.findAll()[1]; //Only one entry
+        res.send(JSON.stringify(settings));
+    }
 }
