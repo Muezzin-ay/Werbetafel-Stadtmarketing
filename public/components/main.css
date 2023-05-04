@@ -108,3 +108,12 @@ body {
 #fileElem {
     display: none;
 }
+
+.settings-area {
+    background-color: #1B1F22;
+    width: 860px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 15px;
+    height: fit-content;
+}
