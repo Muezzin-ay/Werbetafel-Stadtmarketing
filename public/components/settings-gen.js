@@ -14,6 +14,8 @@ function loadSettings() {
 $(document).ready( () => {
 
     loadSettings();
+    let s = $('#checkbox-lol').attr('checked');
+    console.log(s);
 
     $('#save-settings-button').click( () => {
 
