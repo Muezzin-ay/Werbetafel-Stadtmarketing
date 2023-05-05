@@ -98,6 +98,9 @@ $(document).ready( () => {
                 window.setTimeout(() => {
                     $('#green-ack').hide();
                 }, 3000); //feedback for 3s 
+
+                reloadPresentationItems()
+
             }
         });
     }

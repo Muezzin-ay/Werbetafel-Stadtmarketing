@@ -33,15 +33,10 @@ module.exports = {
         });
     },
 
-    deleteImageFile : async function(slideID, presentationID, res) {
-        let slidePath = `${slideDest}Slide-Pr${presentationID}-${slideID}.png`
-        fs.unlink(slidePath, (err) => {
-            if (err) {
-                res.status(500).send('Server is occured.')
-            }
-            else {
-                db.deleteSlide(slideID, res);
-            }
-        });
+    deleteImageFile : async function(slide, res) {
+        let presentationID = slide.dataValues.PFk;
+        let slideID = slide.dataValues.ID;
+        let slidePath = path.join(__dirname, `/../public/slides/Slide-Pr${presentationID}-${slideID}.png`);
+        fs.unlink(slidePath, (err) => {});
     }
 }

@@ -125,9 +125,15 @@ module.exports = {
         res.send(JSON.stringify(slides))
     },
 
-    deleteSlide: async function(slideID, res) {
+    deletePresentation: async function(data, res, deleteImageFile) {
         try {
-            await this.Slide.destroy({ where: { id: slideID } });
+            
+            let slides = await this.Slide.findAll({ where: { PFk: data.presentationID } });
+            for (let slide of slides) {
+                deleteImageFile(slide, res);
+            }
+            await this.Slide.destroy({ where: { PFk: data.presentationID } });
+            await this.Presentation.destroy({ where: { ID: data.presentationID } });
             res.status(200).send('good');
         } catch(err) {
             res.status(500).send('Server is occured.');

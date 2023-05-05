@@ -25,6 +25,17 @@ function swapItemUp(el) {
     }
 }
 
+function deletePresentation(el) {
+    let parent_el = $(el).parent().parent();
+    let preID = parent_el.attr('id');
+    $.post("/api/deletePresentation", { presentationInfo: {presentationID: parseInt(preID)} },
+        (data, status) => {
+            reloadPresentationItems();
+        }
+    )
+}
+
+
 
 // Start executing...
 $(document).ready( () => {

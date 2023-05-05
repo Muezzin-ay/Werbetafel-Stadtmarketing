@@ -1,12 +1,21 @@
 
 
+
+async function reloadPresentationItems() {
+    await $('.presentation-item').each((i, element) => {
+        $(element).remove();
+    });
+    generatePresentationItems();
+}
+
+
+
 function generatePresentationItems() {
     $.get('/api/getPr', (data, status) => {
         slides = JSON.parse(data);
         slides.forEach(element => {
 
             let date = new Date(element.presentation.createdAt);
-
 
             $('.main').append(
                 `
@@ -26,6 +35,7 @@ function generatePresentationItems() {
                     <div class="presentation-control">
                         <button class="btn btn-primary" onclick="swapItemUp(this)">UP</button>
                         <button class="btn btn-primary" onclick="swapItemDown(this)">DOWN</button>
+                        <button class="btn btn-danger" onclick="deletePresentation(this)">Delete</button>
                     </div>
                 </li>
                 `
