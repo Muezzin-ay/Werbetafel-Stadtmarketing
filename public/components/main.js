@@ -29,13 +29,17 @@ function swapItemUp(el) {
 // Start executing...
 $(document).ready( () => {
 
+    var waitingForSaving = false;
+
     generatePresentationItems();
 
     // Make the Presentation List sortable via Drag and Drop
     $('.main').sortable({
         animation: 150, //animation duration
         update: () => {
+            waitingForSaving = true;
             $('#save-sequence-button').css('visibility', 'visible'); //Show saving button
+            $('#save-sequence-button').removeClass('disabled');
             $('#sequence-controls').attr('hidden', false);
         }
     });
@@ -48,16 +52,17 @@ $(document).ready( () => {
         $('.presentation-item').each((i, element) => {
             let preId = $(element).attr('id');
             orderData[i] = preId;
-            console.log(i + ": " + preId);
         });
 
         $.post("/api/changeOrder", { sequence: orderData },
             (data, status) => {
                 $('#sequence-ack').attr('hidden', false);
-                
+
+                waitingForSaving = false;
                 window.setTimeout(() => {
-                    $('#sequence-controls').attr('hidden', true);
-                    $('#save-sequence-button').removeClass('disabled');
+                    if (!waitingForSaving) {
+                        $('#sequence-controls').attr('hidden', true);
+                    };
                     $('#sequence-ack').attr('hidden', true);
                 }, 3000); //feedback for 3s 
             }
