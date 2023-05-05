@@ -16,7 +16,7 @@ $(document).ready( () => {
     loadSettings();
     let s = $('#checkbox-lol').attr('checked');
 
-    $('#save-settings-button').click( () => {
+    $('#save-settings-button').click(() => {
 
         $('#save-settings-button').addClass("disabled");
 

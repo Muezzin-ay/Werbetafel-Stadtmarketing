@@ -35,17 +35,31 @@ $(document).ready( () => {
     $('.main').sortable({
         animation: 150, //animation duration
         update: () => {
-            //Send Presentation Order
-            let orderData = [];
-            $('.presentation-item').each( (i, element) => {
-                let preId = $(element).attr('id');
-                orderData[i]  = preId;
-            });
-
-            $.post("/api/changeOrder", { sequence: orderData },
-                (data, status) => {}
-            )
+            $('#sequence-controls').attr('hidden', false); //Show saving button
         }
     });
+
+    $('#save-sequence-button').click(() => {
+        $('#save-sequence-button').addClass('disabled');
+        
+        //Send Presentation Order
+        let orderData = [];
+        $('.presentation-item').each((i, element) => {
+            let preId = $(element).attr('id');
+            orderData[i] = preId;
+            console.log(i + ": " + preId);
+        });
+
+        $.post("/api/changeOrder", { sequence: orderData },
+            (data, status) => {
+                $('#sequence-ack').attr('hidden', false)
+                window.setTimeout(() => {
+                    $('#sequence-controls').attr('hidden', true); //hide saving button again
+                    $('#save-sequence-button').removeClass('disabled');
+                    $('#sequence-ack').attr('hidden', true)
+                }, 3000); //feedback for 3s 
+            }
+        )
+    })
 
 })

@@ -52,6 +52,17 @@ body {
     margin: 10px;
 }
 
+.sequence-controls {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 25px;
+}
+
+.sequence-controls img {
+    margin-right: 5px;
+}
+
 /* Drag and Drop */
 #drop-area {
     border: 2px dashed #ccc;
