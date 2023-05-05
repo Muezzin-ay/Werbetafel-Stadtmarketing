@@ -3,10 +3,11 @@
 $.holdReady( true );
 
 $.get("/api/getSlides", (data, status) => {
-    slides = JSON.parse(data);
-    slides.forEach(element => {
-        console.log(element);
-        $('.slides').append(`<section data-background="/slides/Slide-Pr${element.PFk}-${element.ID}.png"></section>`);
+    let presentations = JSON.parse(data);
+    presentations.forEach(slides => {
+        slides.forEach(slide => {
+            $('.slides').append(`<section data-background="/slides/Slide-Pr${slide.PFk}-${slide.ID}.png"></section>`);
+        });
     });
     $.holdReady( false );
     

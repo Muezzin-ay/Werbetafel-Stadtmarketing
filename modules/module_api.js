@@ -19,16 +19,16 @@ const slideDest = './public/slides/';
 const upload = multer({ dest:  slideDest + "temp/"})
  
 
-api.get('/getPr', (req, res) => {
-    database.readPresentations(res);
+api.get('/getPr', (req, res) => { // Admin panel
+    database.readFirstSlide(res);
+});
+
+api.get('/getSlides', (req, res) => { //RevealJs show
+    database.readAllSlides(res);
 });
 
 api.get('/createPr', (req, res) => {
     database.createPresentation(res);
-});
-
-api.get('/getSlides', (req, res) => {
-    database.getSlides(res);
 });
 
 api.post('/deletePresentation', (req, res) => {

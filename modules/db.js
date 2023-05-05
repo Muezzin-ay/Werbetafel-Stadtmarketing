@@ -99,8 +99,17 @@ module.exports = {
         }
     },
 
-    readPresentations: async function(res) {
+    createSlide: async function(presentationFK, sequence) {
+        try {
+            await this.Slide.create({ PFk: presentationFK, Sequence: sequence});
+        } catch(e) {
+            console.log(e);
+        }
+    },
+
+    readFirstSlide: async function(res) {
         const presentations = await this.Presentation.findAll({ order:[ ['Sequence', 'ASC'] ] });
+
         let data = [];
         for (let i=0; i<presentations.length; i++) {
             prJsonItem = {}
@@ -112,17 +121,19 @@ module.exports = {
         res.send(JSON.stringify(data));
     },
 
-    createSlide: async function(presentationFK, sequence) {
-        try {
-            await this.Slide.create({ PFk: presentationFK, Sequence: sequence});
-        } catch(e) {
-            console.log(e);
-        }
-    },
+    readAllSlides: async function(res) {
+        const presentations = await this.Presentation.findAll({ order:[ ['Sequence', 'ASC'] ] });
 
-    getSlides: async function(res) {
-        const slides = await this.Slide.findAll();
-        res.send(JSON.stringify(slides))
+        let data = [];
+        for (let i=0; i<presentations.length; i++) {
+            let slidesItem = []
+            let slides = await this.Slide.findAll({ where: { PFk: presentations[i].dataValues.ID}});
+            for (let slide of slides) {
+                slidesItem.push({ ID: slide.dataValues.ID, PFk: slide.dataValues.PFk })
+            };
+            data.push(slidesItem);
+        }
+        res.send(JSON.stringify(data));
     },
 
     deletePresentation: async function(data, res, deleteImageFile) {
