@@ -31,7 +31,17 @@ module.exports = {
                 });
             });
         });
+    },
 
-
+    deleteImageFile : async function(slideID, presentationID, res) {
+        let slidePath = `${slideDest}Slide-Pr${presentationID}-${slideID}.png`
+        fs.unlink(slidePath, (err) => {
+            if (err) {
+                res.status(500).send('Server is occured.')
+            }
+            else {
+                db.deleteSlide(slideID, res);
+            }
+        });
     }
 }

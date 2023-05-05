@@ -125,9 +125,13 @@ module.exports = {
         res.send(JSON.stringify(slides))
     },
 
-    deleteSlide: async function(slideId, res) {
-        await this.Slide.destroy({ where: { id: slideId } });
-        res.send('good');
+    deleteSlide: async function(slideID, res) {
+        try {
+            await this.Slide.destroy({ where: { id: slideID } });
+            res.status(200).send('good');
+        } catch(err) {
+            res.status(500).send('Server is occured.');
+        };
     },
 
     readSettings: async function(res) {
@@ -162,6 +166,5 @@ module.exports = {
             console.log('Unexpected Error: ' + err);
             res.status(500).send('Server is occured.');
         }
-        
     }
 }

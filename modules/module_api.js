@@ -31,8 +31,9 @@ api.get('/getSlides', (req, res) => {
     database.getSlides(res);
 });
 
-api.get('/del', (req, res) => {
-    database.deleteSlide(req.query.id, res);
+api.post('/deleteSlide', (req, res) => {
+    let data = req.body.slideInfo;
+    convert.deleteImageFile(data.slideID, data.presentationID, res)
 });
 
 api.get('/getSettings', (req, res) => {
