@@ -154,8 +154,8 @@ module.exports = {
         try {
             for (let i=0; i < data.length; i++) {
                 let preId = i+1;
-                let presentation = await this.Presentation.findOne({ where: { ID: preId } });
-                await presentation.update({ Sequence: data[i] })
+                let presentation = await this.Presentation.findOne({ where: { ID: data[i] } });
+                await presentation.update({ Sequence: preId })
             };
             res.status(200).send('good');
         } catch(err) {

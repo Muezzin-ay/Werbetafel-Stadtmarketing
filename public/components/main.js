@@ -35,13 +35,14 @@ $(document).ready( () => {
     $('.main').sortable({
         animation: 150, //animation duration
         update: () => {
-            $('#sequence-controls').attr('hidden', false); //Show saving button
+            $('#save-sequence-button').css('visibility', 'visible'); //Show saving button
+            $('#sequence-controls').attr('hidden', false);
         }
     });
 
     $('#save-sequence-button').click(() => {
-        $('#save-sequence-button').addClass('disabled');
-        
+        $('#save-sequence-button').addClass('disabled'); 
+
         //Send Presentation Order
         let orderData = [];
         $('.presentation-item').each((i, element) => {
@@ -52,11 +53,12 @@ $(document).ready( () => {
 
         $.post("/api/changeOrder", { sequence: orderData },
             (data, status) => {
-                $('#sequence-ack').attr('hidden', false)
+                $('#sequence-ack').attr('hidden', false);
+                
                 window.setTimeout(() => {
-                    $('#sequence-controls').attr('hidden', true); //hide saving button again
+                    $('#sequence-controls').attr('hidden', true);
                     $('#save-sequence-button').removeClass('disabled');
-                    $('#sequence-ack').attr('hidden', true)
+                    $('#sequence-ack').attr('hidden', true);
                 }, 3000); //feedback for 3s 
             }
         )

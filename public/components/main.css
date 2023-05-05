@@ -54,13 +54,20 @@ body {
 
 .sequence-controls {
     position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 25px;
     bottom: 25px;
+    background-color: #1B1F22;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .sequence-controls img {
     margin-right: 5px;
+    margin-left: 5px;
+}
+
+.sequence-controls button {
+    visibility: hidden;
 }
 
 /* Drag and Drop */
