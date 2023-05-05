@@ -10,11 +10,12 @@ function generatePresentationItems() {
 
             $('.main').append(
                 `
-                <li class="presentation-item" id="${element.slide.ID}">
+                <li class="presentation-item" id="${element.slide.PFk}">
                 <img src="/slides/Slide-Pr${element.slide.PFk}-${element.slide.ID}.png" height="216">
                     <div class="presentation-description">
                         <div>
-                            <h2>${element.presentation.Name}</h2>
+                            <!--<h2>${element.presentation.Name}</h2>-->
+                            <h2>${element.slide.PFk}</h2>
                         </div>
             
                         <div>
@@ -31,6 +32,5 @@ function generatePresentationItems() {
             );
         });
     });
-    //<img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp" height="216">
-        
+    //<img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp" height="216">    
 }

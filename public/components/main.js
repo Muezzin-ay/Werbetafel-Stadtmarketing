@@ -26,7 +26,6 @@ function swapItemUp(el) {
 }
 
 
-
 // Start executing...
 $(document).ready( () => {
 
@@ -35,8 +34,17 @@ $(document).ready( () => {
     // Make the Presentation List sortable via Drag and Drop
     $('.main').sortable({
         animation: 150, //animation duration
-        change: () => {
-            console.log("changed slide sequence!");
+        update: () => {
+            //Send Presentation Order
+            let orderData = [];
+            $('.presentation-item').each( (i, element) => {
+                let preId = $(element).attr('id');
+                orderData[i]  = preId;
+            });
+
+            $.post("/api/changeOrder", { sequence: orderData },
+                (data, status) => {}
+            )
         }
     });
 

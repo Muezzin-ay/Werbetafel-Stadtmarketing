@@ -44,6 +44,11 @@ api.post('/changeSettings', (req, res) => {
     database.writeSettings(data, res);
 });
 
+api.post('/changeOrder', (req, res) => {
+    let data = req.body.sequence;
+    database.swapPresentationSequence(data, res);
+});
+
 
 api.post('/upload', upload.single('pdf-file'), function(req, res) {
     try {

@@ -100,7 +100,7 @@ module.exports = {
     },
 
     readPresentations: async function(res) {
-        const presentations = await this.Presentation.findAll();
+        const presentations = await this.Presentation.findAll({ order:[ ['Sequence', 'ASC'] ] });
         let data = [];
         for (let i=0; i<presentations.length; i++) {
             prJsonItem = {}
@@ -148,5 +148,20 @@ module.exports = {
                 res.status(500).send('Server is occured.')
             }
         };
+    },
+
+    swapPresentationSequence: async function(data, res) {
+        try {
+            for (let i=0; i < data.length; i++) {
+                let preId = i+1;
+                let presentation = await this.Presentation.findOne({ where: { ID: preId } });
+                await presentation.update({ Sequence: data[i] })
+            };
+            res.status(200).send('good');
+        } catch(err) {
+            console.log('Unexpected Error: ' + err);
+            res.status(500).send('Server is occured.');
+        }
+        
     }
 }
