@@ -74,14 +74,14 @@ body {
 #drop-area {
     border: 2px dashed #ccc;
     width: 100%;
-    height: 480px;
+    height: calc(60vh - 16px) ; /* 480 (new) or 440 */
     border-radius: 20px; /* Original Border Radius*/
 }
 
 .drop-area-surround {
     margin: 50px auto; /* Maybe change back to 100px */
     margin-top: 30px;
-    width: 740px; /* 720 */
+    width: 55%; /* 720 or 740(new) or 875 */
     /*height: 550px;*/
     background-color: #1B1F22;
     border-radius: 25px;
@@ -89,9 +89,16 @@ body {
     padding: 15px; /* 15px */
 }
 
+.input-upload-box {
+    margin: 10px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    display: flex;
+}
+
 .upload-controls {
     margin: 10px;
-    margin-top: 15px;
+    margin-top: 0px;/*15*/
     margin-bottom: 0px;
     /*height: 50px;*/
     overflow: auto;
@@ -101,6 +108,7 @@ body {
 
 .upload-controls button {
     margin: 5px;
+    margin-right: 0px;
 }
 
 .upload-controls div {
