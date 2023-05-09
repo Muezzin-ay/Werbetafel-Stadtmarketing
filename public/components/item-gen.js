@@ -9,6 +9,14 @@ async function reloadPresentationItems() {
 }
 
 
+function checkSlideForOuterPosition(slideLiElement) {
+    if(!$(slideLiElement).next().attr('id')) {
+        $(slideLiElement).find('.slide-sort-button-left')
+    } else if(!$(slideLiElement).prev().attr('id')) {
+
+    }
+}
+
 
 function generatePresentationItems() {
     $.get('/api/getPr', (data, status) => {
@@ -52,11 +60,14 @@ function generatePresentationItems() {
                 let slideElement = $(`<li id=slide-${element.slides[i].ID}><img src="/slides/Slide-Pr${element.slides[i].PFk}-${element.slides[i].ID}.png"></li>`);
                 $(slidePreview).append(slideElement);
 
+                $(slideElement).first().append('<button class="slide-sort-button-left" onclick="swapSlideLeft(this)"><img src="/media/arrow-left.svg"></button>');
+                $(slideElement).first().append('<button class="slide-sort-button-right" onclick="swapSlideRight(this)"><img src="/media/arrow-right.svg"></button>');
+
                 if (i != 0) {
-                    let listEl = $(slideElement).first().append('<button class="slide-sort-button-left" onclick="swapSlideLeft(this)"><img src="/media/arrow-left.svg"></button>');
+                    
                 }; 
                 if(i != element.slides.length-1) {
-                    $(slideElement).first().append('<button class="slide-sort-button-right" onclick="swapSlideRight(this)"><img src="/media/arrow-right.svg"></button>');
+                    
                 }; 
             };
 
