@@ -37,18 +37,36 @@ function generatePresentationItems() {
                         <button class="btn btn-primary" onclick="swapItemUp(this)">UP</button>
                         <button class="btn btn-primary" onclick="swapItemDown(this)">DOWN</button>
                         <button class="btn btn-danger" onclick="deletePresentation(this)">Delete</button>
+                        <button class="btn btn-primary" onclick="extendPresentationPreview(this)">More</button>
                     </div>
                 </div>
-                <div class="slide-preview">
-                    <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
-                    <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
-                    <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
-                    <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
-                    <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
-                </div>
+                <ul class="slide-preview">
+                    <li>
+                        <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
+                    </li>
+                    <li>
+                        <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
+                    </li>
+                    <li>
+                        <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
+                    </li>
+                    <li>
+                        <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
+                    </li>
+                    <li>
+                        <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
+                    </li>
+                    <li>
+                        <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
+                    </li>
+                </ul>
                 </li>
                 `
             );
+
+            $('.slide-preview').each((i, element) => {
+                $(element).hide();
+            });
         });
     });
     //<img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp" height="216">    

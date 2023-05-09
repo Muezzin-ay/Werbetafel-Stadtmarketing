@@ -35,6 +35,12 @@ function deletePresentation(el) {
     )
 }
 
+function extendPresentationPreview(el) {
+    let parent_el = $(el).parent().parent().parent();
+    let slidePreviewBox = $(parent_el).find('.slide-preview');
+    $(slidePreviewBox).toggle();
+}
+
 
 
 // Start executing...
