@@ -42,6 +42,25 @@ function extendPresentationPreview(el) {
 }
 
 
+function swapSlideLeft(el) {
+    let parenEl = $(el).parent();
+    let parentId = parenEl.attr('id');
+    let nextId = parenEl.prev().attr('id');
+    if (nextId) {
+        $('#' + parentId).after($("#" + nextId));
+    }
+}
+
+function swapSlideRight(el) {
+    let parenEl = $(el).parent();
+    let parentId = parenEl.attr('id');
+    let nextId = parenEl.next().attr('id');
+    if (nextId) {
+        $('#' + parentId).before($("#" + nextId));
+    }
+}
+
+
 
 // Start executing...
 $(document).ready( () => {

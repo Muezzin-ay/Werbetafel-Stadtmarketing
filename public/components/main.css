@@ -30,17 +30,33 @@ body {
     padding-bottom: 10px;
     margin: auto;
     margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     overflow: auto;
     white-space: nowrap;
     width: 837px;
     /*border: 5px solid #212529;*/
-    scrollbar-color: #6969dd #181C1F;
+}
+
+::-webkit-scrollbar {
+    background: #181C1F;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6969dd;
+    border-radius: 10px;
 }
 
 .slide-preview li {
-    margin-left: 5px;
-    margin-right: 5px;
     position: relative;
+}
+
+.slide-preview li:not(:last-child) {
+    margin-right: 5px;
+}
+
+.slide-preview li:not(:first-child) {
+    margin-left: 5px;
 }
 
 .slide-preview li img {

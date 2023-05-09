@@ -49,14 +49,14 @@ function generatePresentationItems() {
             let slidePreview = $(presentationElement).find('.slide-preview');
             $(slidePreview).hide();
             for (let i = 0; i < element.slides.length; i++) {
-                let slideElement = $(`<li><img src="/slides/Slide-Pr${element.slides[i].PFk}-${element.slides[i].ID}.png"></li>`);
+                let slideElement = $(`<li id=slide-${element.slides[i].ID}><img src="/slides/Slide-Pr${element.slides[i].PFk}-${element.slides[i].ID}.png"></li>`);
                 $(slidePreview).append(slideElement);
 
                 if (i != 0) {
-                    let listEl = $(slideElement).first().append('<button class="slide-sort-button-left"><img src="/media/arrow-left.svg"></button>');
+                    let listEl = $(slideElement).first().append('<button class="slide-sort-button-left" onclick="swapSlideLeft(this)"><img src="/media/arrow-left.svg"></button>');
                 }; 
                 if(i != element.slides.length-1) {
-                    $(slideElement).first().append('<button class="slide-sort-button-right"><img src="/media/arrow-right.svg"></button>');
+                    $(slideElement).first().append('<button class="slide-sort-button-right" onclick="swapSlideRight(this)"><img src="/media/arrow-right.svg"></button>');
                 }; 
             };
 
