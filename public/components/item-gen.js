@@ -19,8 +19,9 @@ function generatePresentationItems() {
 
             $('.main').append(
                 `
-                <li class="presentation-item" id="${element.slide.PFk}">
-                <img src="/slides/Slide-Pr${element.slide.PFk}-${element.slide.ID}.png" height="216">
+                <li class="presentation-preview-item">
+                <div id="${element.slide.PFk}" class="presentation-item">
+                    <img src="/slides/Slide-Pr${element.slide.PFk}-${element.slide.ID}.png" height="216">
                     <div class="presentation-description">
                         <div>
                             <!--<h2>${element.presentation.Name}</h2>-->
@@ -37,6 +38,14 @@ function generatePresentationItems() {
                         <button class="btn btn-primary" onclick="swapItemDown(this)">DOWN</button>
                         <button class="btn btn-danger" onclick="deletePresentation(this)">Delete</button>
                     </div>
+                </div>
+                <div class="slide-preview">
+                    <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
+                    <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
+                    <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
+                    <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
+                    <img src="https://www.greenhero.de/media/image/fb/57/94/Shiba-Inu-hd_720x600.webp">
+                </div>
                 </li>
                 `
             );

@@ -18,9 +18,29 @@ body {
     margin: 0px;
 }
 
-.presentation-item {
+.presentation-preview-item {
     background-color: #1B1F22;
     margin: 10px;
+    padding: 0;
+}
+
+.slide-preview {
+    display: flex;
+    padding-bottom: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+    overflow: auto;
+    white-space: nowrap;
+    width: 837px;
+    border: 5px solid #212529;
+}
+
+.slide-preview img {
+    margin-right: 5px;
+    height: 190px;
+}
+
+.presentation-item {
     display: flex;
 }
 
