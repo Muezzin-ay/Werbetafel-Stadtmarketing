@@ -113,8 +113,11 @@ module.exports = {
         let data = [];
         for (let i=0; i<presentations.length; i++) {
             prJsonItem = {}
-            let firstSlide = await this.Slide.findOne({ where: { PFk: presentations[i].dataValues.ID, Sequence: 0}});
-            prJsonItem.slide = firstSlide;
+            let slides = await this.Slide.findAll({ where: { PFk: presentations[i].dataValues.ID}});
+            prJsonItem.slides = [];
+            for (let slide of slides) {
+                prJsonItem.slides.push({ ID: slide.dataValues.ID, PFk: slide.dataValues.PFk })
+            };
             prJsonItem.presentation = presentations[i];
             data.push(prJsonItem);
         }
@@ -126,7 +129,7 @@ module.exports = {
 
         let data = [];
         for (let i=0; i<presentations.length; i++) {
-            let slidesItem = []
+            let slidesItem = [];
             let slides = await this.Slide.findAll({ where: { PFk: presentations[i].dataValues.ID}});
             for (let slide of slides) {
                 slidesItem.push({ ID: slide.dataValues.ID, PFk: slide.dataValues.PFk })
