@@ -40,10 +40,40 @@ body {
 .slide-preview li {
     margin-left: 5px;
     margin-right: 5px;
+    position: relative;
 }
 
 .slide-preview li img {
     height: 190px;
+}
+
+.slide-preview li button {
+    position: absolute;
+    margin: auto;
+    bottom: 0;
+    top: 0;
+    background-color: transparent;
+    border: 0;
+}
+
+.slide-sort-button-right {
+    right: 0;
+}
+
+.slide-sort-button-left {
+    left: 0;
+}
+
+.slide-sort-button-right:hover {
+    background-image: linear-gradient(to right, transparent, #6969dd);
+}
+
+.slide-sort-button-left:hover {
+    background-image: linear-gradient(to left, transparent, #6969dd);
+}
+
+.slide-preview li button img {
+    height: 40px;
 }
 
 .presentation-item {
