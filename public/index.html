@@ -57,30 +57,30 @@
             </div>
             <!-- Upload Area -->
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
-                
-                <div class="drop-area-surround">
-                    <div id="drop-area"></div>
-
-                    <div class=" input-upload-box">
-                        <div class="input-group mb-3" data-bs-theme="dark">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
-                            <input type="text" id="presentation-name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <div class="upload-page">
+                    <div class="drop-area-surround">
+                        <div id="drop-area"></div>
+    
+                        <div class=" input-upload-box">
+                            <div class="input-group mb-3" data-bs-theme="dark">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+                                <input type="text" id="presentation-name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div style="padding-left: 10px;"></div>
+                            <div class="input-group mb-3" data-bs-theme="dark">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Firma</span>
+                                <input type="text" id="presentation-company" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                            </div>
                         </div>
-                        <div style="padding-left: 10px;"></div>
-                        <div class="input-group mb-3" data-bs-theme="dark">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Firma</span>
-                            <input type="text" id="presentation-company" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    
+                        <div class="upload-controls">
+                            <div class="spinner-border text-primary" id="upload-spinner" role="status"></div>
+                            <img id="green-ack" src="./media/green-ack.png" alt="" width="20px">
+                            <button class="btn btn-primary disabled" id="upload-button">Abschicken</button>
                         </div>
+                        
                     </div>
-
-                    <div class="upload-controls">
-                        <div class="spinner-border text-primary" id="upload-spinner" role="status"></div>
-                        <img id="green-ack" src="./media/green-ack.png" alt="" width="20px">
-                        <button class="btn btn-primary disabled" id="upload-button">Abschicken</button>
-                    </div>
-                    
                 </div>
-            
             </div>
 
             <!-- Settings Area -->

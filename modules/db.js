@@ -86,7 +86,7 @@ module.exports = {
     },
     
     
-    createPresentation: async function(files, presentationInfo, moveSlide) {        
+    createPresentation: async function(files, presentationInfo, feedbackHandler, moveSlide) {        
         try {
             const pre = await this.Presentation.create({ ExpireDate: '2023-05-12 12:00:00', Name: presentationInfo.name, Creator: presentationInfo.company });
             await pre.update({Sequence: pre.dataValues.ID}) //Set own ID as standart Sequence Position
@@ -96,6 +96,8 @@ module.exports = {
                 let slide = await this.Slide.create({ PFk: pre.dataValues.ID, Sequence: i});
                 moveSlide(files[i], slide.dataValues.ID, pre.dataValues.ID);
             }
+            feedbackHandler.update(3);
+            feedbackHandler.end();
         } catch(e) {
             console.log(e);
         }

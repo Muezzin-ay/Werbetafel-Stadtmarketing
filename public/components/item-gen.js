@@ -2,7 +2,7 @@
 
 
 async function reloadPresentationItems() {
-    await $('.presentation-item').each((i, element) => {
+    await $('.presentation-preview-item').each((i, element) => {
         $(element).remove();
     });
     generatePresentationItems();
@@ -11,9 +11,9 @@ async function reloadPresentationItems() {
 
 function generatePresentationItems() {
     $.get('/api/getPr', (data, status) => {
+        
         slides = JSON.parse(data);
         slides.forEach(element => {
-
             let date = new Date(element.presentation.createdAt);
             let firstSlide = element.slides[0];
 

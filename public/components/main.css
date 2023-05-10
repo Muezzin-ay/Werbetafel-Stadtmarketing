@@ -22,6 +22,7 @@ body {
     background-color: #1B1F22;
     margin: 10px;
     padding: 0;
+    border-radius: 15px;
 }
 
 .slide-preview {
@@ -42,6 +43,7 @@ body {
     background: #181C1F;
     width: 12px;
     height: 12px;
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -101,7 +103,7 @@ body {
 .presentation-item img {
     float: left; 
     margin: 10px;
-    border: 5px solid #212529;
+    border: 5px solid #181C1F;
 }
 
 .presentation-description {
@@ -153,22 +155,30 @@ body {
 }
 
 /* Drag and Drop */
+.upload-page {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
 #drop-area {
     border: 2px dashed #ccc;
     width: 100%;
-    height: calc(60vh - 16px) ; /* 480 (new) or 440 */
+    height: 600px; /* 480 (new) or 440 */
     border-radius: 20px; /* Original Border Radius*/
+    background-color: #181C1F;
 }
 
 .drop-area-surround {
-    margin: 50px auto; /* Maybe change back to 100px */
-    margin-top: 30px;
-    width: 55%; /* 720 or 740(new) or 875 */
+    /*margin: 50px auto; /* Maybe change back to 100px */
+    /*margin-top: 30px;*/
+    width: 1000px;/*55%; /* 720 or 740(new) or 875 */
     /*height: 550px;*/
     background-color: #1B1F22;
-    border-radius: 25px;
+    border-radius: 15px;
     font-family: sans-serif;
-    padding: 15px; /* 15px */
+    padding: 30px; /* 15px */
 }
 
 .input-upload-box {

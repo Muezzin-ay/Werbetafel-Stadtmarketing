@@ -108,9 +108,6 @@ $(document).ready( () => {
                 window.setTimeout(() => {
                     $('#green-ack').hide();
                 }, 3000); //feedback for 3s 
-
-                reloadPresentationItems()
-
             }
         });
     }
@@ -124,6 +121,8 @@ $(document).ready( () => {
             statusInfo = messages[1];
         } else if(response.includes('data: {"done":false,"progress":2}')) {
             statusInfo = messages[2];
+        } else if(response.includes('data: {"done":false,"progress":3}')) {
+            reloadPresentationItems();
         }
         $('#upload-button').html(statusInfo);
         $('#upload-spinner').css('visibility', 'visible');

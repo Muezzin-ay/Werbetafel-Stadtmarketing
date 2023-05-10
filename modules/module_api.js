@@ -62,7 +62,6 @@ api.post('/upload', upload.single('pdf-file'), function(req, res) {
         fs.rename(oldPath, newPath, async function () {
             let imgOut = slideDest + "temp/";
             await convert.createSlidesFromPdf(newPath, imgOut, presentationInfo, feedbackHandler);
-            res.end();
         });
     } catch (error) {
         res.status(500).send('Server is occured.')
