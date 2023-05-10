@@ -62,6 +62,9 @@ $(document).ready( () => {
         var formData = new FormData()
         formData.append('pdf-file', file)
 
+        let prName = $('#presentation-name').val();
+        let prCompany = $('#presentation-presentation').val();
+        
         var last_response_len = false;
         $.ajax({
             url: '/api/upload',

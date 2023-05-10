@@ -9,15 +9,6 @@ async function reloadPresentationItems() {
 }
 
 
-function checkSlideForOuterPosition(slideLiElement) {
-    if(!$(slideLiElement).next().attr('id')) {
-        $(slideLiElement).find('.slide-sort-button-left')
-    } else if(!$(slideLiElement).prev().attr('id')) {
-
-    }
-}
-
-
 function generatePresentationItems() {
     $.get('/api/getPr', (data, status) => {
         slides = JSON.parse(data);
@@ -62,13 +53,6 @@ function generatePresentationItems() {
 
                 $(slideElement).first().append('<button class="slide-sort-button-left" onclick="swapSlideLeft(this)"><img src="/media/arrow-left.svg"></button>');
                 $(slideElement).first().append('<button class="slide-sort-button-right" onclick="swapSlideRight(this)"><img src="/media/arrow-right.svg"></button>');
-
-                if (i != 0) {
-                    
-                }; 
-                if(i != element.slides.length-1) {
-                    
-                }; 
             };
 
             $('.main').append(presentationElement);

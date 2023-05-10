@@ -48,7 +48,9 @@ function swapSlideLeft(el) {
     let nextId = parenEl.prev().attr('id');
     if (nextId) {
         $('#' + parentId).after($("#" + nextId));
-    }
+    } /*else {
+        $(parenEl).find('.slide-sort-button-left').hide()
+    }*/
 }
 
 function swapSlideRight(el) {
@@ -58,6 +60,9 @@ function swapSlideRight(el) {
     if (nextId) {
         $('#' + parentId).before($("#" + nextId));
     }
+    /*else {
+        $(parenEl).find('.slide-sort-button-right').hide()
+    }*/
 }
 
 
