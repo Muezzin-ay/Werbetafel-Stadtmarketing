@@ -24,8 +24,8 @@ function generatePresentationItems() {
                 <img src="/slides/Slide-Pr${firstSlide.PFk}-${firstSlide.ID}.png" height="216">
                 <div class="presentation-description">
                     <div>
-                        <!--<h2>${element.presentation.Name}</h2>-->
-                        <h2>${firstSlide.PFk}</h2>
+                        <h2>${element.presentation.Name}</h2>
+                        <!--<h2>${firstSlide.PFk}</h2>-->
                     </div>
         
                     <div>

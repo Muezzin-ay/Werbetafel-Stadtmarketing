@@ -40,6 +40,8 @@ body {
 
 ::-webkit-scrollbar {
     background: #181C1F;
+    width: 12px;
+    height: 12px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -105,11 +107,19 @@ body {
 .presentation-description {
     margin-right: 75px;
     margin-left: 15px;
+    width: 265px;
+}
+
+.presentation-description ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
 }
 
 .presentation-description div {
     margin-top: 10px;
     color: white;
+    overflow: auto;
+    white-space: nowrap;
 }
 
 .presentation-control {

@@ -33,10 +33,12 @@ module.exports = {
             type: DataTypes.DATE,
         },
         Name: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            defaultValue: "Kampagne"
         },
         Creator: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            defaultValue: "Unbekannt"
         },
         Sequence: {
             type: DataTypes.INTEGER,
@@ -84,9 +86,9 @@ module.exports = {
     },
     
     
-    createPresentation: async function(files, moveSlide) {        
+    createPresentation: async function(files, presentationInfo, moveSlide) {        
         try {
-            const pre = await this.Presentation.create({ ExpireDate: '2023-05-12 12:00:00', Name: "Campagne-1", Creator: "Robin H." });
+            const pre = await this.Presentation.create({ ExpireDate: '2023-05-12 12:00:00', Name: presentationInfo.name, Creator: presentationInfo.company });
             await pre.update({Sequence: pre.dataValues.ID}) //Set own ID as standart Sequence Position
             let slideCount = files.length;
 

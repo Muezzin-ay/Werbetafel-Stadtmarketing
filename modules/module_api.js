@@ -55,12 +55,13 @@ api.post('/upload', upload.single('pdf-file'), function(req, res) {
     try {
         const feedbackHandler = new Progress(res);
 
+        let presentationInfo = JSON.parse(req.body.presentationInfo)
         feedbackHandler.update(1); //[Status] Received File
         let oldPath = slideDest + "temp/" + req.file.filename;
         let newPath = slideDest + "temp/" + req.file.originalname;
         fs.rename(oldPath, newPath, async function () {
             let imgOut = slideDest + "temp/";
-            await convert.createSlidesFromPdf(newPath, imgOut, feedbackHandler);
+            await convert.createSlidesFromPdf(newPath, imgOut, presentationInfo, feedbackHandler);
             res.end();
         });
     } catch (error) {

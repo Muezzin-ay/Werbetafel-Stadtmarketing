@@ -63,7 +63,14 @@ $(document).ready( () => {
         formData.append('pdf-file', file)
 
         let prName = $('#presentation-name').val();
-        let prCompany = $('#presentation-presentation').val();
+        if (prName == "") {
+            prName = "Kampagne";
+        };
+        let prCompany = $('#presentation-company').val();
+        if (prCompany == "") {
+            prCompany = "Unbekannt";
+        };
+        formData.append('presentationInfo', JSON.stringify({name: prName, company: prCompany}));
         
         var last_response_len = false;
         $.ajax({
