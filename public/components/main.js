@@ -60,6 +60,10 @@ function swapSlideRight(el) {
     if (nextId) {
         $('#' + parentId).before($("#" + nextId));
     }
+    let presentationID = $(parenEl).parent().parent().find('.presentation-item').attr('id');
+
+    $(parenEl).findAll('.')
+
     /*else {
         $(parenEl).find('.slide-sort-button-right').hide()
     }*/

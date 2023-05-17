@@ -50,6 +50,10 @@ api.post('/changeOrder', (req, res) => {
     database.swapPresentationSequence(data, res);
 });
 
+api.post('changeSlideSequence', (req, res) => {
+
+});
+
 
 api.post('/upload', upload.single('pdf-file'), function(req, res) {
     try {

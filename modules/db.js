@@ -117,7 +117,7 @@ module.exports = {
         let data = [];
         for (let i=0; i<presentations.length; i++) {
             prJsonItem = {}
-            let slides = await this.Slide.findAll({ where: { PFk: presentations[i].dataValues.ID}});
+            let slides = await this.Slide.findAll({ where: { PFk: presentations[i].dataValues.ID}, order:[ ['Sequence', 'ASC'] ]});
             prJsonItem.slides = [];
             for (let slide of slides) {
                 prJsonItem.slides.push({ ID: slide.dataValues.ID, PFk: slide.dataValues.PFk })
@@ -134,7 +134,7 @@ module.exports = {
         let data = [];
         for (let i=0; i<presentations.length; i++) {
             let slidesItem = [];
-            let slides = await this.Slide.findAll({ where: { PFk: presentations[i].dataValues.ID}});
+            let slides = await this.Slide.findAll({ where: { PFk: presentations[i].dataValues.ID}, order:[ ['Sequence', 'ASC'] ]});
             for (let slide of slides) {
                 slidesItem.push({ ID: slide.dataValues.ID, PFk: slide.dataValues.PFk })
             };
