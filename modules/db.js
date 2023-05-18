@@ -12,15 +12,12 @@ const sequelize = new Sequelize('werbetafel_stadtmarketing', 'panelserver', 'pol
 module.exports = {
 
     authenticate: async function() {
-        await sequelize.authenticate();
-    },
-    
-    testConnection: async function() {
         try {
-            console.log('Connection has been established successfully.');
-          } catch (error) {
-            console.error('Unable to connect to the database:', error);
-        }
+            await sequelize.authenticate();
+            console.log('Connection to database has been established successfully.');
+        } catch (error) {
+            console.error('Unable to connect to the database, maybe it did not start properly.');
+        };
     },
     
     Presentation: sequelize.define('Presentation', {
@@ -89,7 +86,15 @@ module.exports = {
     createPresentation: async function(files, presentationInfo, feedbackHandler, moveSlide) {        
         try {
             const pre = await this.Presentation.create({ ExpireDate: '2023-05-12 12:00:00', Name: presentationInfo.name, Creator: presentationInfo.company });
-            await pre.update({Sequence: pre.dataValues.ID}) //Set own ID as standart Sequence Position
+            await pre.update({ Sequence: pre.dataValues.ID }) //Set own ID as standart Sequence Position
+
+            // Setting a default value based on the pre's ID if there was no input from the user
+            if (pre.dataValues.Name == 'Kampagne') { // Kampagne is already a standart value, set by sequelize
+                let newName = "Kampagne-" + pre.dataValues.ID;
+                await pre.update({ Name: newName })
+            }
+
+
             let slideCount = files.length;
 
             for (let i=0; i<slideCount; i++) {
