@@ -143,6 +143,14 @@ module.exports = {
         res.send(JSON.stringify(data));
     },
 
+    changeSlideSequence: async function(slideSequence, res) {
+        for (slide of slideSequence.slides) {
+            let slideEntry = await this.Slide.findOne({ where: { ID: slide.id } });
+            await slideEntry.update({ Sequence: slide.position })
+        };
+        res.send('good');
+    },
+
     deletePresentation: async function(data, res, deleteImageFile) {
         try {
             

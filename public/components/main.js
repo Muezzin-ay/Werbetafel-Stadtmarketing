@@ -48,9 +48,8 @@ function swapSlideLeft(el) {
     let nextId = parenEl.prev().attr('id');
     if (nextId) {
         $('#' + parentId).after($("#" + nextId));
-    } /*else {
-        $(parenEl).find('.slide-sort-button-left').hide()
-    }*/
+    };
+    uploadSlideSequence($(parenEl).parent().parent());
 }
 
 function swapSlideRight(el) {
@@ -59,14 +58,33 @@ function swapSlideRight(el) {
     let nextId = parenEl.next().attr('id');
     if (nextId) {
         $('#' + parentId).before($("#" + nextId));
-    }
-    let presentationID = $(parenEl).parent().parent().find('.presentation-item').attr('id');
+    };
+    uploadSlideSequence($(parenEl).parent().parent());
+    
+}
 
-    $(parenEl).findAll('.')
 
-    /*else {
-        $(parenEl).find('.slide-sort-button-right').hide()
-    }*/
+function uploadSlideSequence(presentationPreviewElement) {
+    let slideSequence = findSlideSequence(presentationPreviewElement);
+    $.post('/api/changeSlideSequence', {slideSequence: slideSequence}, (data, status) => {
+        if (status != 200) {
+            console.log("Something went wrong in uploading new slide sequence!")
+        };
+    });
+}
+
+
+function findSlideSequence(presentationElement) {
+    let slideSequence = {
+        presentationID: $(presentationElement).find('.presentation-item').attr('id'),
+        slides : []
+    };
+    let slidePreviewElement = $(presentationElement).find('.slide-preview');
+    $(slidePreviewElement).find('.slide-element').each((i, el) => {
+        let slideID = $(el).attr('id');
+        slideSequence.slides.push({ position: i, id: slideID });
+    });
+    return slideSequence
 }
 
 

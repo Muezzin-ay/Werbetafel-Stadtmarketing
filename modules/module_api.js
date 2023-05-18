@@ -8,7 +8,8 @@ const { Progress } = require('express-progressbar');
 
 // Own Modules
 let database = require('./db');
-let convert = require('./convert')
+let convert = require('./convert');
+const db = require('./db');
 
 // Constants
 const api = express.Router();
@@ -50,8 +51,8 @@ api.post('/changeOrder', (req, res) => {
     database.swapPresentationSequence(data, res);
 });
 
-api.post('changeSlideSequence', (req, res) => {
-
+api.post('/changeSlideSequence', (req, res) => {
+    database.changeSlideSequence(req.body.slideSequence, res);
 });
 
 

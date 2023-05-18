@@ -48,7 +48,7 @@ function generatePresentationItems() {
             let slidePreview = $(presentationElement).find('.slide-preview');
             $(slidePreview).hide();
             for (let i = 0; i < element.slides.length; i++) {
-                let slideElement = $(`<li class="slide-element" id=slide-${element.slides[i].ID}><img src="/slides/Slide-Pr${element.slides[i].PFk}-${element.slides[i].ID}.png"></li>`);
+                let slideElement = $(`<li class="slide-element" id=${element.slides[i].ID}><img src="/slides/Slide-Pr${element.slides[i].PFk}-${element.slides[i].ID}.png"></li>`);
                 $(slidePreview).append(slideElement);
 
                 $(slideElement).first().append('<button class="slide-sort-button-left" onclick="swapSlideLeft(this)"><img src="/media/arrow-left.svg"></button>');
