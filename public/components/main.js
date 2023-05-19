@@ -102,9 +102,10 @@ $(document).ready( () => {
     // Make the Presentation List sortable via Drag and Drop
     $('.main').sortable({
         animation: 150, //animation duration
+        axis: 'y',
         handle: (el) => {
-            let slidePreviewBox = $(el).find('.slide-preview');
-            $(slidePreviewBox).hide();
+            //let slidePreviewBox = $(el).find('.slide-preview');
+            //$(slidePreviewBox).hide();
         },
         update: () => {
             waitingForSaving = true;
