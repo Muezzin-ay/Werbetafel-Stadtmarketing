@@ -4,6 +4,7 @@ Button OnClick Functions
 */
 
 // Swap Buttons from Presentation Element
+//Maybe unsecure and bugged
 function swapItemDown(el) {
     parent_el = $(el).parent().parent();
     parent_id = parent_el.attr('id');
@@ -24,6 +25,8 @@ function swapItemUp(el) {
         $("#" + parent_id).after($("#" + before_id));
     }
 }
+// End bugged part
+
 
 function deletePresentation(el) {
     let parent_el = $(el).parent().parent();
@@ -35,11 +38,12 @@ function deletePresentation(el) {
     )
 }
 
-function extendPresentationPreview(el) {
+function tooglePresentationPreview(el) {
     let parent_el = $(el).parent().parent().parent();
     let slidePreviewBox = $(parent_el).find('.slide-preview');
     $(slidePreviewBox).toggle();
 }
+
 
 
 function swapSlideLeft(el) {
@@ -60,14 +64,13 @@ function swapSlideRight(el) {
         $('#' + parentId).before($("#" + nextId));
     };
     uploadSlideSequence($(parenEl).parent().parent());
-    
 }
 
 
 function uploadSlideSequence(presentationPreviewElement) {
     let slideSequence = findSlideSequence(presentationPreviewElement);
     $.post('/api/changeSlideSequence', {slideSequence: slideSequence}, (data, status) => {
-        if (status != 200) {
+        if (status != 'success') {
             console.log("Something went wrong in uploading new slide sequence!")
         };
     });
@@ -99,6 +102,10 @@ $(document).ready( () => {
     // Make the Presentation List sortable via Drag and Drop
     $('.main').sortable({
         animation: 150, //animation duration
+        handle: (el) => {
+            let slidePreviewBox = $(el).find('.slide-preview');
+            $(slidePreviewBox).hide();
+        },
         update: () => {
             waitingForSaving = true;
             $('#save-sequence-button').css('visibility', 'visible'); //Show saving button

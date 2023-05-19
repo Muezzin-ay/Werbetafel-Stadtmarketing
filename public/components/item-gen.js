@@ -37,7 +37,7 @@ function generatePresentationItems() {
                     <button class="btn btn-primary" onclick="swapItemUp(this)">UP</button>
                     <button class="btn btn-primary" onclick="swapItemDown(this)">DOWN</button>
                     <button class="btn btn-danger" onclick="deletePresentation(this)">Delete</button>
-                    <button class="btn btn-primary" onclick="extendPresentationPreview(this)">More</button>
+                    <button class="btn btn-primary" onclick="tooglePresentationPreview(this)">More</button>
                 </div>
             </div>
             <ul class="slide-preview"></ul>

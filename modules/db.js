@@ -153,7 +153,7 @@ module.exports = {
             let slideEntry = await this.Slide.findOne({ where: { ID: slide.id } });
             await slideEntry.update({ Sequence: slide.position })
         };
-        res.send('good');
+        res.status(200).send('good');
     },
 
     deletePresentation: async function(data, res, deleteImageFile) {
