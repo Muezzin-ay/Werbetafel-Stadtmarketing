@@ -1,10 +1,12 @@
 const http = require('http');
 const express = require('express');
+const { Server } = require('socket.io');
 
 // Own 
 const api = require('./modules/module_api');
-const db = require('./modules/db')
-const commands = require('./modules/system_commands')
+const db = require('./modules/db');
+const commands = require('./modules/system_commands');
+const { bot } = require('./modules/telegram_bot');
 
 //const webdriver = require('./modules/webdriver');
 
@@ -28,5 +30,19 @@ app.use('/api', api);
 app.use('/', express.static(__dirname + "/public"))
 app.use('/show', express.static(__dirname + "/public/show.html"))
 
-var server = http.createServer(app).listen(PORT);
+var server = http.createServer(app)
+
+const io = new Server(server);
+io.on('connection', (socket) => {
+    console.log('[SERVER] Socket connection established');
+});
+
+
+bot.on('message', (msg) => {
+    const chatId = msg.chat.id;
+    io.emit("letsgo", msg);
+    bot.sendMessage(chatId, 'Received your message');
+});
+
+server.listen(PORT);
 console.log('[SERVER] Listening on Port ' + PORT);
