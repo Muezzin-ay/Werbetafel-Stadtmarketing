@@ -6,7 +6,7 @@ const { Server } = require('socket.io');
 const api = require('./modules/module_api');
 const db = require('./modules/db');
 const commands = require('./modules/system_commands');
-const { bot } = require('./modules/telegram_bot');
+const { debugBot } = require('./modules/telegram_bot');
 
 //const webdriver = require('./modules/webdriver');
 
@@ -37,11 +37,10 @@ io.on('connection', (socket) => {
     console.log('[SERVER] Socket connection established');
 });
 
-
-bot.on('message', (msg) => {
+debugBot.on('message', (msg) => {
     const chatId = msg.chat.id;
     io.emit("letsgo", msg);
-    bot.sendMessage(chatId, 'Received your message');
+    debugBot.sendMessage(chatId, 'Received your message');
 });
 
 server.listen(PORT);

@@ -7,26 +7,40 @@ let socket = io();
 
 socket.on('letsgo', (msg) => {
     console.log(msg.text);
+
+    $('.slides').prepend(`
+        <section data-auto-animate data-autoslide="2000">
+        </section>
+        <section data-auto-animate data-autoslide="2000">
+            <h1>it's kinda cool</h1>
+        </section>
+        <section data-auto-animate data-autoslide="2000">
+            <h1>it's kinda cool</h1>
+            <h1>dating you, </h1>
+        </section>
+        <section data-auto-animate data-autoslide="10000">
+            <h1>it's kinda cool</h1>
+            <h1>dating you, </h1>
+            <h1>${'[name]'}</h1>
+        </section>
+    `);
+
+    Reveal.addEventListener('slidechanged', function (evt) {
+        ind = Reveal.getIndices().h;
+        if (ind == 4) {
+            location.reload();
+        }
+    });
+
+    Reveal.sync();
+    Reveal.slide(0);
+
+
 })
 
 
 $.get("/api/getSlides", (data, status) => {
     let presentations = JSON.parse(data);
-
-    $('.slides').append(`
-        <section data-auto-animate data-autoslide="2000">
-            <h1>kinda cool</h1>
-        </section>
-        <section data-auto-animate data-autoslide="2000">
-            <h1>kinda cool</h1>
-            <h1>dating you, </h1>
-        </section>
-        <section data-auto-animate data-autoslide="2000">
-            <h1>kinda cool</h1>
-            <h1>dating you, </h1>
-            <h1>${'[name]'}</h1>
-        </section>
-    `);
 
     presentations.forEach(slides => {
         slides.forEach(slide => {
