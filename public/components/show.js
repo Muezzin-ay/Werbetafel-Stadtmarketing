@@ -58,9 +58,9 @@ $(document).ready( () => {
         settings = JSON.parse(data);
 
         Reveal.initialize({
-            autoSlide: settings.AutoSlideDuration,
+            //autoSlide: settings.AutoSlideDuration,
             loop: true,
-            controls: false, //standart is false, debug -> true
+            controls: true, //standart is false, debug -> true
             progress: false,
             controlsTutorial: false,
             // Settings for non pdf slides

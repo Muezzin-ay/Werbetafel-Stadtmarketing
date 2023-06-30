@@ -37,11 +37,16 @@ io.on('connection', (socket) => {
     console.log('[SERVER] Socket connection established');
 });
 
-debugBot.on('message', (msg) => {
-    const chatId = msg.chat.id;
-    io.emit("letsgo", msg);
-    debugBot.sendMessage(chatId, 'Received your message');
-});
+try {
+    debugBot.on('message', (msg) => {
+        const chatId = msg.chat.id;
+        io.emit("letsgo", msg);
+        debugBot.sendMessage(chatId, 'Received your message');
+    });
+} catch(e) {
+    console.log('Could not connect to debug Bot, please check connection to the internet!')
+}
+
 
 server.listen(PORT);
 console.log('[SERVER] Listening on Port ' + PORT);
