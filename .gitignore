@@ -11,3 +11,4 @@
 /public/slides/p*
 /*.uxf
 /.vscode
+/public/src/socket.io/socket.io.js
