@@ -8,7 +8,7 @@
     "node-poppler": "^6.2.2",
     "node-telegram-bot-api": "^0.61.0",
     "sequelize": "^6.31.1",
-    "socket.io": "^4.7.0"
+    "socket.io": "^4.7.1"
   },
   "name": "werbetafel-stadtmarketing",
   "description": "",
