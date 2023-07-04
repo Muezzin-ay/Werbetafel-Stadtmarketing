@@ -1,33 +1,39 @@
 
 
+
+function createMsgTemplate(msgLines) {
+    let template = '';
+    let lastSection = '';
+    let autoSlideTime = 2000;
+
+    msgLines.unshift(''); //First Entry is always empty
+
+    msgLines.forEach((line, i, lines) => {
+        lastSection += '<h1>' + line + '</h1>';
+        if (i == lines.length - 1) autoSlideTime = 10000;
+        template += `<section data-auto-animate data-autoslide="${autoSlideTime}">${lastSection}</section>`;
+    })
+
+    return template
+}
+
+
+
+
 $.holdReady( true );
 
 
 let socket = io();
 
 socket.on('letsgo', (msg) => {
-    console.log(msg.text);
+    let msgLines = msg.text.split('\n');
+    let template = createMsgTemplate(msgLines);
 
-    $('.slides').prepend(`
-        <section data-auto-animate data-autoslide="2000">
-        </section>
-        <section data-auto-animate data-autoslide="2000">
-            <h1>it's kinda cool</h1>
-        </section>
-        <section data-auto-animate data-autoslide="2000">
-            <h1>it's kinda cool</h1>
-            <h1>dating you, </h1>
-        </section>
-        <section data-auto-animate data-autoslide="10000">
-            <h1>it's kinda cool</h1>
-            <h1>dating you, </h1>
-            <h1>${'[name]'}</h1>
-        </section>
-    `);
+    $('.slides').prepend(template);
 
     Reveal.addEventListener('slidechanged', function (evt) {
         ind = Reveal.getIndices().h;
-        if (ind == 4) {
+        if (ind == msgLines.length + 1) {
             location.reload();
         }
     });
@@ -58,9 +64,9 @@ $(document).ready( () => {
         settings = JSON.parse(data);
 
         Reveal.initialize({
-            //autoSlide: settings.AutoSlideDuration,
+            autoSlide: settings.AutoSlideDuration,
             loop: true,
-            controls: true, //standart is false, debug -> true
+            controls: false, //standart is false, debug -> true
             progress: false,
             controlsTutorial: false,
             // Settings for non pdf slides

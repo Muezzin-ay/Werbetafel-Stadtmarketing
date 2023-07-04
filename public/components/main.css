@@ -134,6 +134,8 @@ body {
 
 .presentation-control button {
     margin: 5px;
+    margin-top: 7px;
+    margin-bottom: 7px;
 }
 
 .sequence-controls {

@@ -34,8 +34,6 @@ function generatePresentationItems() {
                     </div>
                 </div>
                 <div class="presentation-control">
-                    <button class="btn btn-primary" onclick="swapItemUp(this)">UP</button>
-                    <button class="btn btn-primary" onclick="swapItemDown(this)">DOWN</button>
                     <button class="btn btn-danger" onclick="deletePresentation(this)">Delete</button>
                     <button class="btn btn-primary" onclick="tooglePresentationPreview(this)">More</button>
                 </div>
@@ -44,6 +42,8 @@ function generatePresentationItems() {
             </li>
             `
             );
+            //  <button class="btn btn-primary" onclick="swapItemUp(this)">UP</button>
+            //  <button class="btn btn-primary" onclick="swapItemDown(this)">DOWN</button>
 
             let slidePreview = $(presentationElement).find('.slide-preview');
             $(slidePreview).hide();
