@@ -1,6 +1,5 @@
 
 
-
 function createMsgTemplate(msgLines) {
     let template = '';
     let lastSection = '';
@@ -13,10 +12,8 @@ function createMsgTemplate(msgLines) {
         if (i == lines.length - 1) autoSlideTime = 10000;
         template += `<section data-auto-animate data-autoslide="${autoSlideTime}">${lastSection}</section>`;
     })
-
     return template
 }
-
 
 
 

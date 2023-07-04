@@ -2,7 +2,6 @@
 const { Sequelize, DataTypes, SequelizeDatabaseError } = require('sequelize');
 
 
-
 const sequelize = new Sequelize('werbetafel_stadtmarketing', 'panelserver', 'polizei', {
     dialect: 'mariadb',
     dialectOptions: {}

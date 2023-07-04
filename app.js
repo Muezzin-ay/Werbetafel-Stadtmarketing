@@ -1,3 +1,11 @@
+/*
+    Head File 'Werbetafel Stadtmarketing'-Project
+    Author: Robin Hart
+    Creation date: 04.11.22
+    Github: https://github.com/Muezzin-ay/Werbetafel-Stadtmarketing
+*/
+
+
 const http = require('http');
 const express = require('express');
 const { Server } = require('socket.io');

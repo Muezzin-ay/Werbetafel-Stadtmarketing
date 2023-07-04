@@ -1,6 +1,5 @@
 
 
-
 async function reloadPresentationItems() {
     await $('.presentation-preview-item').each((i, element) => {
         $(element).remove();
