@@ -156,15 +156,16 @@ module.exports = {
         res.send(JSON.stringify(data));
     },
 
-    changeSlideSequence: async function(slideSequence, res) {
+    changeSlideSequence: async function(slideSequence, io, res) {
         for (slide of slideSequence.slides) {
             let slideEntry = await this.Slide.findOne({ where: { ID: slide.id } });
             await slideEntry.update({ Sequence: slide.position })
         };
+        io.emit("reloadPage", ''); //Send reload command to all active clients
         res.status(200).send('good');
     },
 
-    deletePresentation: async function(data, res, deleteImageFile) {
+    deletePresentation: async function(data, io, res, deleteImageFile) {
         try {
             
             let slides = await this.Slide.findAll({ where: { PFk: data.presentationID } });
@@ -173,6 +174,7 @@ module.exports = {
             }
             await this.Slide.destroy({ where: { PFk: data.presentationID } });
             await this.Presentation.destroy({ where: { ID: data.presentationID } });
+            io.emit("reloadPage", ''); //Send reload command to all active clients
             res.status(200).send('good');
         } catch(err) {
             res.status(500).send('Server is occured.');
@@ -184,10 +186,11 @@ module.exports = {
         res.send(JSON.stringify(settings));
     }, 
 
-    writeSettings: async function(data, res) {
+    writeSettings: async function(data, io, res) {
         let settings = await this.Setting.findOne(); //Only one entry
         try {
             await settings.update(data);
+            io.emit("reloadPage", ''); //Send reload command to all active clients
             res.status(200).send('good');
         } catch(err) {
             if (err === SequelizeDatabaseError) {
@@ -199,13 +202,14 @@ module.exports = {
         };
     },
 
-    swapPresentationSequence: async function(data, res) {
+    swapPresentationSequence: async function(data, io, res) {
         try {
             for (let i=0; i < data.length; i++) {
                 let preId = i+1;
                 let presentation = await this.Presentation.findOne({ where: { ID: data[i] } });
                 await presentation.update({ Sequence: preId })
             };
+            io.emit("reloadPage", ''); //Send reload command to all active clients
             res.status(200).send('good');
         } catch(err) {
             console.log('Unexpected Error: ' + err);

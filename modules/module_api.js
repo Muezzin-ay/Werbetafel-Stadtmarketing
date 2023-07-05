@@ -35,7 +35,7 @@ api.get('/createPr', (req, res) => {
 
 api.post('/deletePresentation', (req, res) => {
     let data = req.body.presentationInfo;
-    database.deletePresentation(data, res, convert.deleteImageFile)
+    database.deletePresentation(data, req.io, res, convert.deleteImageFile)
 });
 
 api.get('/getSettings', (req, res) => {
@@ -44,16 +44,16 @@ api.get('/getSettings', (req, res) => {
 
 api.post('/changeSettings', (req, res) => {
     let data = req.body.settings;
-    database.writeSettings(data, res);
+    database.writeSettings(data, req.io, res);
 });
 
 api.post('/changeOrder', (req, res) => {
     let data = req.body.sequence;
-    database.swapPresentationSequence(data, res);
+    database.swapPresentationSequence(data, req.io, res);
 });
 
 api.post('/changeSlideSequence', (req, res) => {
-    database.changeSlideSequence(req.body.slideSequence, res);
+    database.changeSlideSequence(req.body.slideSequence, req.io, res);
 });
 
 
