@@ -18,7 +18,7 @@ function establishTelegramConnection(io) {
         try {
             debugBot.on('message', (msg) => {
                 const chatId = msg.chat.id;
-                io.emit("letsgo", msg);
+                io.emit("showMessage", msg);
                 debugBot.sendMessage(chatId, 'Received your message');
             });
         } catch(e) {

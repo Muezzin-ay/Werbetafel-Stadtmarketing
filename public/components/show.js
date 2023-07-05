@@ -22,7 +22,7 @@ $.holdReady( true );
 
 let socket = io();
 
-socket.on('letsgo', (msg) => {
+socket.on('showMessage', (msg) => {
     let msgLines = msg.text.split('\n');
     let template = createMsgTemplate(msgLines);
 
@@ -37,8 +37,11 @@ socket.on('letsgo', (msg) => {
 
     Reveal.sync();
     Reveal.slide(0);
+})
 
-
+socket.on('reloadPage', (msg) => {
+    console.log('reload');
+    location.reload();
 })
 
 

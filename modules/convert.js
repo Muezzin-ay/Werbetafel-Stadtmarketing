@@ -7,7 +7,7 @@ const db = require('./db');
 
 
 module.exports = {
-    createSlidesFromPdf : async function(pdfFile, imgOut, presentationInfo, feedbackHandler) {
+    createSlidesFromPdf : async function(pdfFile, imgOut, presentationInfo, feedbackHandler, io) {
         const poppler = new Poppler("/usr/bin");
         const options = {
             firstPageToConvert: 1,
@@ -21,7 +21,7 @@ module.exports = {
 
         fs.unlinkSync(pdfFile);
         fs.readdir(imgOut, (err, files) => {
-            db.createPresentation(files, presentationInfo, feedbackHandler, (filename, slideID, presentationID) => {
+            db.createPresentation(files, presentationInfo, feedbackHandler, io,  (filename, slideID, presentationID) => {
                 oldPath = path.join(__dirname, `/../public/slides/temp/${filename}`);
                 newPath = path.join(__dirname, `/../public/slides/Slide-Pr${presentationID}-${slideID}.png`);
                 fs.rename(oldPath, newPath, (err)=> {

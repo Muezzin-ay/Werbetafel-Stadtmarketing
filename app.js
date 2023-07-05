@@ -13,7 +13,6 @@ const { Server } = require('socket.io');
 // Own 
 const api = require('./modules/module_api');
 const db = require('./modules/db');
-const commands = require('./modules/system_commands');
 const { establishTelegramConnection } = require('./modules/telegram_bot');
 
 // Settings
@@ -23,8 +22,15 @@ const PORT = 8084;
 db.authenticate();
 //db.initDatabase();
 var app = express();
+var server = http.createServer(app)
+
+const io = new Server(server);
+io.on('connection', (socket) => {
+    console.log('[SERVER] Socket connection established.');
+});
 
 app.use(function(req, res, next){
+    req.io = io; //Make Socket Stream accessible in api file
     next();
 });
 
@@ -34,13 +40,6 @@ app.use('/api', api);
 // Frontend 
 app.use('/', express.static(__dirname + "/public"))
 app.use('/show', express.static(__dirname + "/public/show.html"))
-
-var server = http.createServer(app)
-
-const io = new Server(server);
-io.on('connection', (socket) => {
-    console.log('[SERVER] Socket connection established');
-});
 
 establishTelegramConnection(io);
 

@@ -90,7 +90,7 @@ module.exports = {
         underFunc(token)
     },
     
-    createPresentation: async function(files, presentationInfo, feedbackHandler, moveSlide) {        
+    createPresentation: async function(files, presentationInfo, feedbackHandler, io, moveSlide) {        
         try {
             const pre = await this.Presentation.create({ ExpireDate: '2023-05-12 12:00:00', Name: presentationInfo.name, Creator: presentationInfo.company });
             await pre.update({ Sequence: pre.dataValues.ID }) //Set own ID as standart Sequence Position
@@ -109,6 +109,7 @@ module.exports = {
                 moveSlide(files[i], slide.dataValues.ID, pre.dataValues.ID);
             }
             feedbackHandler.update(3);
+            io.emit("reloadPage", ''); //Send reload command to all active clients
             feedbackHandler.end();
         } catch(e) {
             console.log(e);
