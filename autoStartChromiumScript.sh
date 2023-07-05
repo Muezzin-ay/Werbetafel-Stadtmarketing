@@ -1,9 +1,9 @@
 #!/bin/bash
-echo "Starting chromium in 5 seconds..."
-sleep 5
+echo "Starting chromium in 10 seconds..."
+sleep 10
 while :
     do
-        DISPLAY=:0 chromium-browser --noerrdialogs --kiosk http://localhost:8084/show
+        DISPLAY=:0 chromium-browser --noerrdialogs --kiosk --no-sandbox http://localhost:8084/show
 done
 
 ## Information and Todo ##
