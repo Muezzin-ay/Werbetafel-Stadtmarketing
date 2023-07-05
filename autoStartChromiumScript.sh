@@ -9,4 +9,5 @@ done
 ## Information and Todo ##
 # --no-sandbox
 # write to 'rc.local' -file at '/etc/rc.local' :
-# sh [Path to Start File]/autoStartChromiumScript.sh
+# sudo --user=pi sh /home/pi/Dev/Werbetafel-Stadtmarketing/autoStartChromiumScript.sh (Inside of the File)
+# sudo chmod +x /etc/rc.local (Terminal)
