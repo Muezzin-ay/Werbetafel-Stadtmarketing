@@ -1,14 +1,32 @@
 
 const TelegramBot = require('node-telegram-bot-api');
 
-const token = '6289890383:AAGNLZQH9GZ0aNSFWkGGt2hX6oR9XqMBmnA';
-let debugBot;
+const database = require('./db');
 
-try {
-    debugBot = new TelegramBot(token, {polling: true});
-} catch(e) {
 
+function establishTelegramConnection(io) {
+    database.readTelegramSecret((token) => {
+        let debugBot;
+    
+        try {
+            debugBot = new TelegramBot(token, {polling: true});
+        } catch(e) {
+            console.error('[BOT] An error occured, while connection to Telegram!')
+            return;
+        }
+
+        try {
+            debugBot.on('message', (msg) => {
+                const chatId = msg.chat.id;
+                io.emit("letsgo", msg);
+                debugBot.sendMessage(chatId, 'Received your message');
+            });
+        } catch(e) {
+            console.error('Could not connect to debug Bot, please check connection to the internet!');
+            return;
+        }
+    });
 }
 
 
-module.exports = {debugBot}
+module.exports = { establishTelegramConnection }

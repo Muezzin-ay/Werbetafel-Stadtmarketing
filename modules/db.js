@@ -63,6 +63,9 @@ module.exports = {
         AutoSlideDuration: {
             type: DataTypes.INTEGER,
             defaultValue: 10000 //10 seconds
+        },
+        TelegramSecret: {
+            type: DataTypes.STRING
         }
     }),
     
@@ -80,7 +83,12 @@ module.exports = {
         }
         
     },
-    
+
+    readTelegramSecret: async function(underFunc) {
+        let settings = await this.Setting.findOne({ attributes: { exclude: ['id', 'createdAt', 'updatedAt'] } })
+        let token = settings.dataValues.TelegramSecret
+        underFunc(token)
+    },
     
     createPresentation: async function(files, presentationInfo, feedbackHandler, moveSlide) {        
         try {

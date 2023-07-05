@@ -14,15 +14,12 @@ const { Server } = require('socket.io');
 const api = require('./modules/module_api');
 const db = require('./modules/db');
 const commands = require('./modules/system_commands');
-const { debugBot } = require('./modules/telegram_bot');
-
-//const webdriver = require('./modules/webdriver');
+const { establishTelegramConnection } = require('./modules/telegram_bot');
 
 // Settings
 const PORT = 8084;
 
 //establish database connection
-//commands.startMariaDBServer()
 db.authenticate();
 //db.initDatabase();
 var app = express();
@@ -45,16 +42,7 @@ io.on('connection', (socket) => {
     console.log('[SERVER] Socket connection established');
 });
 
-try {
-    debugBot.on('message', (msg) => {
-        const chatId = msg.chat.id;
-        io.emit("letsgo", msg);
-        debugBot.sendMessage(chatId, 'Received your message');
-    });
-} catch(e) {
-    console.log('Could not connect to debug Bot, please check connection to the internet!')
-}
-
+establishTelegramConnection(io);
 
 server.listen(PORT);
 console.log('[SERVER] Listening on Port ' + PORT);
