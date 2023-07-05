@@ -3,6 +3,7 @@
 /public/src/jquery/jquery.js
 /public/src/jquery/jquery-ui.js
 /public/src/jquery/jquery.ui.sortable-animation.js
+/public/src/bootstrap/*
 /public/slides/temp/*
 /public/slides/*.pdf
 /public/slides/*.png
