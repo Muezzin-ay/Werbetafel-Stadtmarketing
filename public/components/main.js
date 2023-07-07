@@ -29,7 +29,28 @@ function swapItemUp(el) {
 
 
 function toogleHidePresentation(el) {
-    
+    let parent_el = $(el).parent().parent();
+    let preID = parent_el.attr('id');
+    let isVisibile = true;
+
+    let buttonIcon = $(el).children();
+    let iconVisbile = './media/eye.svg';
+    let iconHidden = './media/eye-slash.svg'
+
+    if ($(buttonIcon).attr('src') == iconVisbile) {
+        $(buttonIcon).attr('src', iconHidden);
+        $(el).toggleClass("btn-secondary btn-danger"); //Set color grey<->red
+        isVisibile = false; //Because click should change the visibiliy
+    } else {
+        $(buttonIcon).attr('src', iconVisbile);
+        $(el).toggleClass("btn-secondary btn-danger");
+    }
+
+    $.post("/api/changePresentationVisbility", { presentationInfo: {presentationID: parseInt(preID), isVisibile: isVisibile} },
+        (data, status) => {
+            
+        }
+    )
 } 
 
 

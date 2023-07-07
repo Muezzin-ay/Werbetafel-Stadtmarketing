@@ -39,6 +39,10 @@ module.exports = {
         Sequence: {
             type: DataTypes.INTEGER,
             defaultValue: 0
+        },
+        Visible: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
         }
     }),
     
@@ -163,6 +167,17 @@ module.exports = {
         };
         io.emit("reloadPage", ''); //Send reload command to all active clients
         res.status(200).send('good');
+    },
+
+    setPresentationVisibility: async function(data, io, res) {
+        try {
+            const presentation = await this.Presentation.findOne({ where: { ID: data.presentationID} });
+            await presentation.update({ Visible: data.isVisibile });
+            io.emit('reloadPage', '');
+            res.status(200).send('good');
+        } catch(err) {
+            res.status(500).send('Server is occured.');
+        }
     },
 
     deletePresentation: async function(data, io, res, deleteImageFile) {

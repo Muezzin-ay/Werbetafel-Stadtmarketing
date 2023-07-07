@@ -33,6 +33,11 @@ api.get('/createPr', (req, res) => {
     database.createPresentation(res);
 });
 
+api.post('/changePresentationVisbility', (req, res) => {
+    let data = req.body.presentationInfo;
+    database.setPresentationVisibility(data, req.io, res);
+});
+
 api.post('/deletePresentation', (req, res) => {
     let data = req.body.presentationInfo;
     database.deletePresentation(data, req.io, res, convert.deleteImageFile)
@@ -55,7 +60,6 @@ api.post('/changeOrder', (req, res) => {
 api.post('/changeSlideSequence', (req, res) => {
     database.changeSlideSequence(req.body.slideSequence, req.io, res);
 });
-
 
 api.post('/upload', upload.single('pdf-file'), function(req, res) {
     try {

@@ -8,7 +8,7 @@ function establishTelegramConnection(io) {
     database.readTelegramSecret((token) => {
         let debugBot;
 
-        if (token != "") {
+        if (token != "" && token != null) {
             try {
                 debugBot = new TelegramBot(token, {polling: true});
             

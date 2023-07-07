@@ -11,10 +11,17 @@ async function reloadPresentationItems() {
 function generatePresentationItems() {
     $.get('/api/getPr', (data, status) => {
         
-        slides = JSON.parse(data);
-        slides.forEach(element => {
+        presentations = JSON.parse(data);
+        presentations.forEach(element => {
             let date = new Date(element.presentation.createdAt);
             let firstSlide = element.slides[0];
+
+            let visbilityIcon = 'eye-slash.svg';
+            let visbilityColor = 'btn-danger';
+            if (element.presentation.Visible) {
+                visbilityIcon = 'eye.svg';
+                visbilityColor = 'btn-secondary';
+            }
 
             let presentationElement = $(
             `
@@ -33,9 +40,9 @@ function generatePresentationItems() {
                     </div>
                 </div>
                 <div class="presentation-control">
-                    <button class="btn btn-secondary" onclick="toogleHidePresentation(this)"><i class="bi bi-trash"></i></button>
-                    <button class="btn btn-danger" onclick="deletePresentation(this)">Delete</button>
-                    <button class="btn btn-primary" onclick="tooglePresentationPreview(this)">More</button>
+                    <button class="btn ${visbilityColor}" onclick="toogleHidePresentation(this)"><img src="./media/${visbilityIcon}"></button>
+                    <button class="btn btn-danger" onclick="deletePresentation(this)"><img src="./media/trash.svg"></button>
+                    <button class="btn btn-primary" onclick="tooglePresentationPreview(this)"><img src="./media/three-dots.svg"></button>
                 </div>
             </div>
             <ul class="slide-preview"></ul>
