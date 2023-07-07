@@ -18,15 +18,17 @@ function generatePresentationItems() {
 
             let visbilityIcon = 'eye-slash.svg';
             let visbilityColor = 'danger';
+            let borderSettings = "rounded-3 border border-danger";
             if (element.presentation.Visible) {
                 visbilityIcon = 'eye.svg';
                 visbilityColor = 'secondary';
+                borderSettings = '';
             }
 
             let presentationElement = $(
             `
             <li class="presentation-preview-item">
-            <div id="${firstSlide.PFk}" class="presentation-item rounded border border-${visbilityColor}">
+            <div id="${firstSlide.PFk}" class="presentation-item ${borderSettings}">
                 <img src="/slides/Slide-Pr${firstSlide.PFk}-${firstSlide.ID}.png" height="216">
                 <div class="presentation-description">
                     <div>

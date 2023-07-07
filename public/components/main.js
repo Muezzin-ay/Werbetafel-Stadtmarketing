@@ -45,7 +45,7 @@ function toogleHidePresentation(el) {
         
     }
     $(el).toggleClass("btn-secondary btn-danger"); //Set color grey<->red
-    $(parent_el).toggleClass("border-secondary border-danger"); 
+    $(parent_el).toggleClass("rounded-3 border border-secondary border-danger"); // Also change border color
 
     $.post("/api/changePresentationVisbility", { presentationInfo: {presentationID: parseInt(preID), isVisibile: isVisibile} },
         (data, status) => {
