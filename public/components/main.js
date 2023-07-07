@@ -39,12 +39,13 @@ function toogleHidePresentation(el) {
 
     if ($(buttonIcon).attr('src') == iconVisbile) {
         $(buttonIcon).attr('src', iconHidden);
-        $(el).toggleClass("btn-secondary btn-danger"); //Set color grey<->red
         isVisibile = false; //Because click should change the visibiliy
     } else {
         $(buttonIcon).attr('src', iconVisbile);
-        $(el).toggleClass("btn-secondary btn-danger");
+        
     }
+    $(el).toggleClass("btn-secondary btn-danger"); //Set color grey<->red
+    $(parent_el).toggleClass("border-secondary border-danger"); 
 
     $.post("/api/changePresentationVisbility", { presentationInfo: {presentationID: parseInt(preID), isVisibile: isVisibile} },
         (data, status) => {

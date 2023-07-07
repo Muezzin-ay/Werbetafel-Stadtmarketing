@@ -17,16 +17,16 @@ function generatePresentationItems() {
             let firstSlide = element.slides[0];
 
             let visbilityIcon = 'eye-slash.svg';
-            let visbilityColor = 'btn-danger';
+            let visbilityColor = 'danger';
             if (element.presentation.Visible) {
                 visbilityIcon = 'eye.svg';
-                visbilityColor = 'btn-secondary';
+                visbilityColor = 'secondary';
             }
 
             let presentationElement = $(
             `
             <li class="presentation-preview-item">
-            <div id="${firstSlide.PFk}" class="presentation-item">
+            <div id="${firstSlide.PFk}" class="presentation-item rounded border border-${visbilityColor}">
                 <img src="/slides/Slide-Pr${firstSlide.PFk}-${firstSlide.ID}.png" height="216">
                 <div class="presentation-description">
                     <div>
@@ -40,7 +40,7 @@ function generatePresentationItems() {
                     </div>
                 </div>
                 <div class="presentation-control">
-                    <button class="btn ${visbilityColor}" onclick="toogleHidePresentation(this)"><img src="./media/${visbilityIcon}"></button>
+                    <button class="btn btn-${visbilityColor}" onclick="toogleHidePresentation(this)"><img src="./media/${visbilityIcon}"></button>
                     <button class="btn btn-danger" onclick="deletePresentation(this)"><img src="./media/trash.svg"></button>
                     <button class="btn btn-primary" onclick="tooglePresentationPreview(this)"><img src="./media/three-dots.svg"></button>
                 </div>
