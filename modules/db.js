@@ -146,12 +146,12 @@ module.exports = {
     },
 
     readAllSlides: async function(res) {
-        const presentations = await this.Presentation.findAll({ order:[ ['Sequence', 'ASC'] ] });
+        const presentations = await this.Presentation.findAll({ where: { Visible: true }, order:[ ['Sequence', 'ASC'] ] });
 
         let data = [];
         for (let i=0; i<presentations.length; i++) {
             let slidesItem = [];
-            let slides = await this.Slide.findAll({ where: { PFk: presentations[i].dataValues.ID}, order:[ ['Sequence', 'ASC'] ]});
+            let slides = await this.Slide.findAll({ where: { PFk: presentations[i].dataValues.ID }, order:[ ['Sequence', 'ASC'] ]});
             for (let slide of slides) {
                 slidesItem.push({ ID: slide.dataValues.ID, PFk: slide.dataValues.PFk })
             };
