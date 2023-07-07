@@ -33,6 +33,7 @@ function generatePresentationItems() {
                     </div>
                 </div>
                 <div class="presentation-control">
+                    <button class="btn btn-secondary" onclick="toogleHidePresentation(this)"><i class="bi bi-trash"></i></button>
                     <button class="btn btn-danger" onclick="deletePresentation(this)">Delete</button>
                     <button class="btn btn-primary" onclick="tooglePresentationPreview(this)">More</button>
                 </div>

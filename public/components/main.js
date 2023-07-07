@@ -28,6 +28,11 @@ function swapItemUp(el) {
 // End bugged part
 
 
+function toogleHidePresentation(el) {
+    
+} 
+
+
 function deletePresentation(el) {
     let parent_el = $(el).parent().parent();
     let preID = parent_el.attr('id');
