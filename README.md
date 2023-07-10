@@ -65,6 +65,11 @@ Also do not forget to run:
 $ pm2 save
 ```
 
+Finally restart the system:
+
+```console
+$ sudo reboot
+```
 
 
 ## Usage
