@@ -65,14 +65,37 @@ Also do not forget to run:
 $ pm2 save
 ```
 
+A static IP address is strongly recommended, therefore change RaspberryPis DHCP settings:
+
+```console
+$ sudo nano /etc/dhcpcd.conf
+```
+
+Add the following lines:
+
+```
+interface eth0
+static ip_address=[IP ADDRESS]
+static routers=[GATEWAY]
+static domain_name_servers=[DNS SERVER]
+```
+You should change *eth0* ot *wlan0* if you are using ad wifi connection.
+
 Finally restart the system:
 
 ```console
 $ sudo reboot
 ```
 
-
 ## Usage
+
+Devices in the same Network as your RaspberryPi can open the configuration panel of the *Werbetafel-Stadtmarketing* system in theire Browser via this address:
+
+```
+http://[IP OF THE SYSTEM]:8080/
+```
+Please note that unsecure *http* instead of *https* was used. Additionally the configuration panel is not protected with a password.
+
 
 ## Collaborators
 
